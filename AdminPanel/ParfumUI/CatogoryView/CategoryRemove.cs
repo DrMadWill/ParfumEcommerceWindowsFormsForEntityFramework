@@ -1,4 +1,7 @@
-﻿using ParfumUI.Parfum.Load;
+﻿using ParfumUI.Common;
+using ParfumUI.DataModelMsSql;
+using ParfumUI.Load;
+using ParfumUI.Parfum.Load;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,35 +24,28 @@ namespace ParfumUI.CatogoryView
 
         private void combCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string category = combCategory.SelectedItem.ToString().Trim();
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-            {
-                string command = $"select * from DeleteUpdateCategoryToParfum where Category='{category}'";
-                using (SqlCommand sqlCommand = new SqlCommand(command, sqlConnection))
-                {
-                    listParfums.Items.Clear();
-                    sqlConnection.Open();
-                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                    {
+            CategoryElementChange();
+        }
 
-                        while (sqlDataReader.Read())
-                        {
-                            listParfums.Items.Add(sqlDataReader[1].ToString());
-                        }
-                    }
-                }
+        public void CategoryElementChange()
+        {
+            string category = combCategory.SelectedItem.ToString().Trim();
+            var categorySelected = LoadCommonData._db.DeleteUpdateCategoryToParfums.Where(dr => dr.Category.ToLower() == category.ToLower()).Select(dr => dr.Header);
+            listParfums.Items.Clear();
+            foreach (var item in categorySelected)
+            {
+                listParfums.Items.Add(item);
             }
         }
 
         private void CategoryRemove_Load(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-                LoadParfumItems.LoadCategory(sqlConnection, true, combCategory);
+            LoadCommonData.LoadCategory(combCategory);
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Remove"))
+            if (ParfumMessenge.IsAreYouSure(" Are You Remove"))
             {
                 string name = "";
                 foreach (var item in listParfums.SelectedItems)
@@ -58,45 +54,43 @@ namespace ParfumUI.CatogoryView
                 }
                 string[] names = name.Replace("ListViewItem: {", "").Replace("}", "").Split(',');
 
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+                string category = combCategory.SelectedItem.ToString().Trim();
+                StringBuilder info = new StringBuilder();
+                for (int i = 0; i < names.Length; i++)
                 {
-                    // Select iformation
-
-                    string category = combCategory.SelectedItem.ToString().Trim();
-
-                    string command = "";
-
-                    for (int i = 0; i < names.Length; i++)
+                    // No Selected
+                    if (string.IsNullOrEmpty(names[0]))
                     {
-                        if (string.IsNullOrEmpty(names[0]))
+                        ParfumMessenge.Error("You Must Be Selecet Some Elemet");
+                        return;
+                    }
+
+                    //
+                    string header = names[i];
+                    info.Append(header);
+                   if(names.Length!=1)
+                        info.Append(",");
+
+                    var categoryToParfumId = LoadCommonData._db.DeleteUpdateCategoryToParfums
+                        .FirstOrDefault(dr => dr.Header.ToLower() == header.ToLower() && dr.Category.ToLower() == category.ToLower()).Ids;
+
+                    if (categoryToParfumId != 0)
+                    {
+                        var categoryToParfums = LoadCommonData._db.CategoryToParfums
+                            .Find(categoryToParfumId);
+                        if (categoryToParfums != null)
                         {
-                            return;
+                            LoadCommonData._db.CategoryToParfums.Remove(categoryToParfums);
+                            LoadCommonData._db.SaveChanges();
                         }
-                        command = $"Execute usp_RemoveCategoryToParfume @Header='{names[i]}' ,@Category='{category}'";
 
-                        using (SqlCommand sqlCommand = new SqlCommand(command, sqlConnection))
-                        {
-                            if (i == 0)
-                                sqlConnection.Open();
-
-                            // -----------------Information Added DataBases
-                            sqlCommand.ExecuteNonQuery();
-                        }
                     }
 
-                    LoadParfumItems.MessengeWarning("Removed");
-                    RefresData.salePriceLists.ChangeData();
-                    int index = combCategory.SelectedIndex;
-                    if (index == 0)
-                    {
-                        combCategory.SelectedIndex = index + 1;
-                    }
-                    else
-                    {
-                        combCategory.SelectedIndex = index - 1;
-                    }
-                    combCategory.SelectedIndex = index;
                 }
+
+                ParfumMessenge.Warning($"{info} Removed From {category}");
+                RefresData.salePriceLists.ChangeData();
+                CategoryElementChange();
 
             }
         }

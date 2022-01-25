@@ -116,110 +116,119 @@
       <DependentUpon>SalePriceLists.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ParfumMessenge.cs" />
-    <Compile Include="DataMsSqlModel\ActiveUserTable.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\ActiveUserTable.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Brend.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Brend.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\CategoryToParfum.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\CategoryListParfum.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Catogory.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\CategoryToParfum.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\DeleteHeader.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Catogory.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\DeleteSalePirceUI.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\DeleteHeader.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\DeleteUpdateCategoryToParfum.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\DeleteSalePirceUI.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\DeleteUpdateHeader.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\DeleteUpdateCategoryToParfum.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Density.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\DeleteUpdateHeader.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\FullDetailParfum.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Density.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Gender.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\FullDetailParfum.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\MidDetalParfume.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Gender.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\ParfumDbModel.Context.cs">
+    <Compile Include="DataModelMsSql\MidDetalParfume.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelMsSql\MidDetalParfumeForUpdate.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelMsSql\ParfumDBFirstModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParfumDbModel.Context.tt</DependentUpon>
+      <DependentUpon>ParfumDBFirstModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\ParfumDbModel.cs">
+    <Compile Include="DataModelMsSql\ParfumDBFirstModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\ParfumDbModel.Designer.cs">
+    <Compile Include="DataModelMsSql\ParfumDBFirstModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParfumDbModel.edmx</DependentUpon>
+      <DependentUpon>ParfumDBFirstModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Parfume.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Parfume.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\ParfumLoginUser.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\ParfumLoginUser.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Sale.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Sale.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SaleActivity.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SaleActivity.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SaleActivity1.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SaleActivity1.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SaleActivityMonitor.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SaleActivityMonitor.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SaleDetailParfum.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SaleActivitysIsUser.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SalePirceUI.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SaleDetailParfum.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SalePrice.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SalePirceUI.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\SearchHead.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SalePrice.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\Size.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\SearchHead.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\Size.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\sysdiagram.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\User.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\sysdiagram.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\usp_SaleShowCategoryParfums_Result.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\User.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\usp_SelectIdSalePirce_Result.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\usp_SaleShowCategoryParfums_Result.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataMsSqlModel\usp_ShowCategoryParfums_Result.cs">
-      <DependentUpon>ParfumDbModel.tt</DependentUpon>
+    <Compile Include="DataModelMsSql\usp_SelectIdSalePirce_Result.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModelMsSql\usp_ShowCategoryParfums_Result.cs">
+      <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -248,12 +257,6 @@
     </Compile>
     <Compile Include="Parfum\Parfum Function.Designer.cs">
       <DependentUpon>Parfum Function.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Parfum\ParfumAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Parfum\ParfumAdd.Designer.cs">
-      <DependentUpon>ParfumAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Parfum\ParfumeUpdate.cs">
       <SubType>Form</SubType>
@@ -320,9 +323,6 @@
     <EmbeddedResource Include="Parfum\Brend\BrendUpdateDelete.resx">
       <DependentUpon>BrendUpdateDelete.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Parfum\ParfumAdd.resx">
-      <DependentUpon>ParfumAdd.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Parfum\ParfumeUpdate.resx">
       <DependentUpon>ParfumeUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -350,12 +350,12 @@
     <EmbeddedResource Include="Users\UserSaleMonitor.resx">
       <DependentUpon>UserSaleMonitor.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="DataMsSqlModel\ParfumDbModel.edmx">
+    <EntityDeploy Include="DataModelMsSql\ParfumDBFirstModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ParfumDbModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ParfumDBFirstModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataMsSqlModel\ParfumDbModel.edmx.diagram">
-      <DependentUpon>ParfumDbModel.edmx</DependentUpon>
+    <None Include="DataModelMsSql\ParfumDBFirstModel.edmx.diagram">
+      <DependentUpon>ParfumDBFirstModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -385,15 +385,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DataMsSqlModel\ParfumDbModel.Context.tt">
+    <Content Include="DataModelMsSql\ParfumDBFirstModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ParfumDbModel.Context.cs</LastGenOutput>
-      <DependentUpon>ParfumDbModel.edmx</DependentUpon>
+      <DependentUpon>ParfumDBFirstModel.edmx</DependentUpon>
+      <LastGenOutput>ParfumDBFirstModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataMsSqlModel\ParfumDbModel.tt">
+    <Content Include="DataModelMsSql\ParfumDBFirstModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ParfumDbModel.edmx</DependentUpon>
-      <LastGenOutput>ParfumDbModel.cs</LastGenOutput>
+      <DependentUpon>ParfumDBFirstModel.edmx</DependentUpon>
+      <LastGenOutput>ParfumDBFirstModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

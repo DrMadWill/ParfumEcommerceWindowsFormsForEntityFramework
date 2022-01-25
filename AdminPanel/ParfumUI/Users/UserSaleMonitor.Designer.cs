@@ -35,15 +35,28 @@ namespace ParfumUI.Users
             this.combCatogory = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnSale = new System.Windows.Forms.Button();
             this.combUser = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.dataGridViewSales = new System.Windows.Forms.DataGridView();
+            this.dateTimeSale = new System.Windows.Forms.DateTimePicker();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.textSearchName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.combEmploye = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.checkEmp = new System.Windows.Forms.CheckBox();
+            this.checkUser = new System.Windows.Forms.CheckBox();
             this.ParfumId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ParfumN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,14 +65,15 @@ namespace ParfumUI.Users
             this.ParfumPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaseCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimeSale = new System.Windows.Forms.DateTimePicker();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.textSearchName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSales)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewShearch
@@ -72,12 +86,12 @@ namespace ParfumUI.Users
             this.dataGridViewShearch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewShearch.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridViewShearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewShearch.Location = new System.Drawing.Point(12, 132);
+            this.dataGridViewShearch.Location = new System.Drawing.Point(6, 132);
             this.dataGridViewShearch.Name = "dataGridViewShearch";
             this.dataGridViewShearch.ReadOnly = true;
             this.dataGridViewShearch.RowHeadersWidth = 51;
             this.dataGridViewShearch.RowTemplate.Height = 24;
-            this.dataGridViewShearch.Size = new System.Drawing.Size(1515, 292);
+            this.dataGridViewShearch.Size = new System.Drawing.Size(1528, 292);
             this.dataGridViewShearch.TabIndex = 37;
             this.dataGridViewShearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewShearch_CellDoubleClick);
             // 
@@ -136,24 +150,13 @@ namespace ParfumUI.Users
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(7, 435);
+            this.label2.Location = new System.Drawing.Point(6, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 46);
+            this.label2.Size = new System.Drawing.Size(103, 39);
             this.label2.TabIndex = 42;
             this.label2.Text = "User:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(608, 441);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(169, 38);
-            this.label3.TabIndex = 43;
-            this.label3.Text = "Sale Data";
             // 
             // btnSale
             // 
@@ -161,7 +164,7 @@ namespace ParfumUI.Users
             this.btnSale.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnSale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSale.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSale.Location = new System.Drawing.Point(1384, 441);
+            this.btnSale.Location = new System.Drawing.Point(182, 13);
             this.btnSale.Name = "btnSale";
             this.btnSale.Size = new System.Drawing.Size(146, 46);
             this.btnSale.TabIndex = 44;
@@ -171,13 +174,15 @@ namespace ParfumUI.Users
             // 
             // combUser
             // 
+            this.combUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.combUser.BackColor = System.Drawing.SystemColors.HighlightText;
             this.combUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.combUser.FormattingEnabled = true;
-            this.combUser.Location = new System.Drawing.Point(148, 446);
+            this.combUser.Location = new System.Drawing.Point(115, 15);
             this.combUser.Name = "combUser";
-            this.combUser.Size = new System.Drawing.Size(402, 33);
+            this.combUser.Size = new System.Drawing.Size(260, 33);
             this.combUser.TabIndex = 45;
             // 
             // btnClear
@@ -186,7 +191,7 @@ namespace ParfumUI.Users
             this.btnClear.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnClear.Location = new System.Drawing.Point(1210, 441);
+            this.btnClear.Location = new System.Drawing.Point(12, 13);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(146, 46);
             this.btnClear.TabIndex = 46;
@@ -207,7 +212,6 @@ namespace ParfumUI.Users
             this.ParfumId,
             this.PriceId,
             this.ParfumN,
-            this.Column1,
             this.Column2,
             this.Column3,
             this.Column4,
@@ -216,90 +220,18 @@ namespace ParfumUI.Users
             this.ParfumPrice,
             this.BaseCount,
             this.SaleCount});
-            this.dataGridViewSales.Location = new System.Drawing.Point(16, 493);
+            this.dataGridViewSales.Location = new System.Drawing.Point(3, 71);
             this.dataGridViewSales.Name = "dataGridViewSales";
             this.dataGridViewSales.RowHeadersWidth = 51;
             this.dataGridViewSales.RowTemplate.Height = 24;
-            this.dataGridViewSales.Size = new System.Drawing.Size(1515, 319);
+            this.dataGridViewSales.Size = new System.Drawing.Size(1534, 323);
             this.dataGridViewSales.TabIndex = 47;
             this.dataGridViewSales.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSales_CellDoubleClick);
-            // 
-            // ParfumId
-            // 
-            this.ParfumId.HeaderText = "Id";
-            this.ParfumId.MinimumWidth = 6;
-            this.ParfumId.Name = "ParfumId";
-            // 
-            // PriceId
-            // 
-            this.PriceId.HeaderText = "PriceId";
-            this.PriceId.MinimumWidth = 6;
-            this.PriceId.Name = "PriceId";
-            // 
-            // ParfumN
-            // 
-            this.ParfumN.HeaderText = "Name";
-            this.ParfumN.MinimumWidth = 6;
-            this.ParfumN.Name = "ParfumN";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Image";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Description";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Brend";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Gender";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Density";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Size";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            // 
-            // ParfumPrice
-            // 
-            this.ParfumPrice.HeaderText = "Price";
-            this.ParfumPrice.MinimumWidth = 6;
-            this.ParfumPrice.Name = "ParfumPrice";
-            // 
-            // BaseCount
-            // 
-            this.BaseCount.HeaderText = "Base Count";
-            this.BaseCount.MinimumWidth = 6;
-            this.BaseCount.Name = "BaseCount";
-            // 
-            // SaleCount
-            // 
-            this.SaleCount.HeaderText = "SaleCount";
-            this.SaleCount.MinimumWidth = 6;
-            this.SaleCount.Name = "SaleCount";
             // 
             // dateTimeSale
             // 
             this.dateTimeSale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimeSale.Location = new System.Drawing.Point(793, 447);
+            this.dateTimeSale.Location = new System.Drawing.Point(3, 15);
             this.dateTimeSale.Name = "dateTimeSale";
             this.dateTimeSale.Size = new System.Drawing.Size(371, 30);
             this.dateTimeSale.TabIndex = 54;
@@ -357,20 +289,216 @@ namespace ParfumUI.Users
             this.panel1.Size = new System.Drawing.Size(1540, 427);
             this.panel1.TabIndex = 58;
             // 
+            // combEmploye
+            // 
+            this.combEmploye.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.combEmploye.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.combEmploye.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combEmploye.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.combEmploye.FormattingEnabled = true;
+            this.combEmploye.Location = new System.Drawing.Point(198, 15);
+            this.combEmploye.Name = "combEmploye";
+            this.combEmploye.Size = new System.Drawing.Size(236, 33);
+            this.combEmploye.TabIndex = 60;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(9, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(167, 39);
+            this.label5.TabIndex = 59;
+            this.label5.Text = "Emoloye:";
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.checkUser);
+            this.panel2.Controls.Add(this.combUser);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(378, 56);
+            this.panel2.TabIndex = 58;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.checkEmp);
+            this.panel3.Controls.Add(this.combEmploye);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Location = new System.Drawing.Point(387, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(437, 56);
+            this.panel3.TabIndex = 59;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewSales, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 427);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.38035F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.61964F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1540, 397);
+            this.tableLayoutPanel1.TabIndex = 59;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.44149F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.55851F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 377F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 329F));
+            this.tableLayoutPanel2.Controls.Add(this.panel4, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel3, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel5, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1534, 62);
+            this.tableLayoutPanel2.TabIndex = 48;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.btnClear);
+            this.panel4.Controls.Add(this.btnSale);
+            this.panel4.Location = new System.Drawing.Point(1207, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(324, 56);
+            this.panel4.TabIndex = 60;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.dateTimeSale);
+            this.panel5.Location = new System.Drawing.Point(830, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(371, 56);
+            this.panel5.TabIndex = 61;
+            // 
+            // checkEmp
+            // 
+            this.checkEmp.AutoSize = true;
+            this.checkEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkEmp.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.checkEmp.Location = new System.Drawing.Point(16, -3);
+            this.checkEmp.Name = "checkEmp";
+            this.checkEmp.Size = new System.Drawing.Size(74, 24);
+            this.checkEmp.TabIndex = 59;
+            this.checkEmp.Text = "Using";
+            this.checkEmp.UseVisualStyleBackColor = true;
+            // 
+            // checkUser
+            // 
+            this.checkUser.AutoSize = true;
+            this.checkUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.checkUser.Location = new System.Drawing.Point(13, 0);
+            this.checkUser.Name = "checkUser";
+            this.checkUser.Size = new System.Drawing.Size(74, 24);
+            this.checkUser.TabIndex = 58;
+            this.checkUser.Text = "Using";
+            this.checkUser.UseVisualStyleBackColor = true;
+            // 
+            // ParfumId
+            // 
+            this.ParfumId.HeaderText = "Id";
+            this.ParfumId.MinimumWidth = 6;
+            this.ParfumId.Name = "ParfumId";
+            // 
+            // PriceId
+            // 
+            this.PriceId.HeaderText = "PriceId";
+            this.PriceId.MinimumWidth = 6;
+            this.PriceId.Name = "PriceId";
+            // 
+            // ParfumN
+            // 
+            this.ParfumN.HeaderText = "Name";
+            this.ParfumN.MinimumWidth = 6;
+            this.ParfumN.Name = "ParfumN";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Description";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Brend";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Gender";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Density";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Size";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            // 
+            // ParfumPrice
+            // 
+            this.ParfumPrice.HeaderText = "Price";
+            this.ParfumPrice.MinimumWidth = 6;
+            this.ParfumPrice.Name = "ParfumPrice";
+            // 
+            // BaseCount
+            // 
+            this.BaseCount.HeaderText = "Base Count";
+            this.BaseCount.MinimumWidth = 6;
+            this.BaseCount.Name = "BaseCount";
+            // 
+            // SaleCount
+            // 
+            this.SaleCount.HeaderText = "SaleCount";
+            this.SaleCount.MinimumWidth = 6;
+            this.SaleCount.Name = "SaleCount";
+            // 
             // UserSaleMonitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1540, 824);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dateTimeSale);
-            this.Controls.Add(this.dataGridViewSales);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.combUser);
-            this.Controls.Add(this.btnSale);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Name = "UserSaleMonitor";
             this.Text = "User Sale Monitor";
             this.Load += new System.EventHandler(this.UserSaleMonitor_Load);
@@ -378,8 +506,15 @@ namespace ParfumUI.Users
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSales)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -391,15 +526,28 @@ namespace ParfumUI.Users
         private System.Windows.Forms.ComboBox combCatogory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSale;
         private System.Windows.Forms.ComboBox combUser;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dataGridViewSales;
+        private System.Windows.Forms.DateTimePicker dateTimeSale;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox textSearchName;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox combEmploye;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox checkUser;
+        private System.Windows.Forms.CheckBox checkEmp;
         private System.Windows.Forms.DataGridViewTextBoxColumn ParfumId;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ParfumN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
@@ -408,10 +556,5 @@ namespace ParfumUI.Users
         private System.Windows.Forms.DataGridViewTextBoxColumn ParfumPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn BaseCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleCount;
-        private System.Windows.Forms.DateTimePicker dateTimeSale;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox textSearchName;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel1;
     }
 }

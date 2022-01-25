@@ -7,11 +7,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ParfumUI.DataMsSqlModel;
 
 
 
@@ -31,14 +31,6 @@ namespace ParfumUI
             ChangeParfum();
         }
 
-        
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            ParfumAdd parfumAdd = new ParfumAdd();
-            RefresData.parfumAdd = parfumAdd;
-            parfumAdd.ShowDialog();
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -54,7 +46,35 @@ namespace ParfumUI
             dataGridView1.DataSource = parfumDetial;
         }
 
-       
-        
+        private void btnRefres_Click(object sender, EventArgs e)
+        {
+            labelDataGridStatus.Text = "All Parfums";
+            ChangeParfum();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string shearch = textSearchName.Text.Trim().ToLower();
+            dataGridView1.DataSource = LoadCommonData._db.MidDetalParfumes.Where(dr => dr.Name.Trim().ToLower().Contains(shearch)).ToList();
+            labelDataGridStatus.Text = "Search Parfum Resault";
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                int Id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                pictureBox1.Image = null;
+                var image = LoadCommonData._db.Parfumes.Find(Id).Image;
+                if (null!=image)
+                {
+                    MemoryStream memory = new MemoryStream(image);
+                    Image ret = Image.FromStream(memory);
+                    pictureBox1.Image = ret;
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+        }
     }
 }

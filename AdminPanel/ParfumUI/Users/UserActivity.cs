@@ -31,19 +31,15 @@ namespace ParfumUI.Users
 
         private void ChangeData()
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-            {
-                // Clear Data
-                dataGridViewLoginUser.DataSource = null;
-                dataGridViwUser.DataSource = null;
-                // User Data
-                dataGridViwUser.DataSource = LoadCommonData._db.ActiveUserTables.ToList();
+            // Clear Data
+            dataGridViewLoginUser.DataSource = null;
+            dataGridViwUser.DataSource = null;
+            // User Data
+            dataGridViwUser.DataSource = LoadCommonData._db.ActiveUserTables.ToList();
 
-                // Login User Data
-                dataGridViewLoginUser.DataSource = LoadCommonData._db.ParfumLoginUsers.ToList();
-                labelLoginUserCount.Text ="User Login :" + dataGridViewLoginUser.Rows.Count.ToString();
-
-            }
+            // Login User Data
+            dataGridViewLoginUser.DataSource = LoadCommonData._db.ParfumLoginUsers.ToList();
+            labelLoginUserCount.Text ="User Login :" + dataGridViewLoginUser.Rows.Count.ToString();
         }
 
         
@@ -60,6 +56,16 @@ namespace ParfumUI.Users
                 
                 string fullname = textUserName.Text.Trim();
                 string password = textPassword.Text.Trim();
+                if (IsAdded(fullname))
+                {
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(fullname) || string.IsNullOrEmpty(password))
+                {
+                    ParfumMessenge.Error("You Must Be Wrtie Information");
+                    return;
+                }
 
                 var userUpdate = LoadCommonData._db.Users.FirstOrDefault(dr => dr.FullName.ToLower() == oldname.ToLower());
                 if (userUpdate != null)
@@ -75,9 +81,7 @@ namespace ParfumUI.Users
 
                     ChangeData();
                     ClearData();
-
                     ParfumMessenge.Warning($"{oldname} is new FullName {fullname}");
-                    oldname = "";
                 }
                 
             }
@@ -110,13 +114,24 @@ namespace ParfumUI.Users
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure())
+            if (ParfumMessenge.IsAreYouSure("Are You Sure Add"))
             {
+
                 string fullname = textUserName.Text.Trim();
                 string password = textPassword.Text.Trim();
 
-                
-                DataMsSqlModel.User user1 = new DataMsSqlModel.User()
+                if (IsAdded(fullname))
+                {
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(fullname) || string.IsNullOrEmpty(password))
+                {
+                    ParfumMessenge.Error("You Must Be Wrtie Information");
+                    return;
+                }
+
+                DataModelMsSql.User user1 = new DataModelMsSql.User()
                 {
                     FullName = fullname,
                     Password = password,
@@ -199,6 +214,18 @@ namespace ParfumUI.Users
 
             }
             
+        }
+
+        private bool IsAdded(string name)
+        {
+            bool isAdd = false;
+            var isAddedName = LoadCommonData._db.Users.FirstOrDefault(dr => dr.FullName.ToLower() == name.ToLower());
+            if (isAddedName != null)
+            {
+                ParfumMessenge.Error($"This {name} Alredy Added ");
+                isAdd = true;
+            }
+            return isAdd;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using ParfumUI.Parfum.Load;
+﻿using ParfumUI.Common;
+using ParfumUI.Load;
+using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder.Volume;
 using System;
 using System.Collections.Generic;
@@ -19,8 +21,8 @@ namespace ParfumUI
     {
 
         DataTable dataTable = new DataTable();
-        string PriceId = "";
-        string Size = "";
+        int PriceId =0;
+        int PafumSize = 0;
         public SalePrice()
         {
             InitializeComponent();
@@ -29,60 +31,65 @@ namespace ParfumUI
 
         private void SalePrice_Load(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-            {
-
-                LoadParfumItems.LoadSearchName(sqlConnection, true, combSearchName);
-                LoadParfumItems.LoadSize(sqlConnection, false, combSize);
-
-            }
+            // Size and Shearch Name Load
+            LoadCommonData.LoadSearchName(combSearchName);
+            LoadCommonData.LoadSize(combSize);
         }
+
         //Save 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Create"))
+
+            
+            if (ParfumMessenge.IsAreYouSure($"Are Sure Add Price ?"))
             {
-                int Id = ((ParfumHeader)combSearchName.SelectedItem).Id;
-                int size = Convert.ToInt32(combSize.SelectedItem.ToString().Trim());
-                int price = Convert.ToInt32(textPrice.Text.Trim());
-                int number = Convert.ToInt32(textNumber.Text.Trim());
-
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+                int size;
+                int price;
+                int number; 
+                try
                 {
-                    // Parfum to Sale Pirce
-                    if (!IsAdd(size))
-                    {
-                        MessageBox.Show("Is Already Added");
-                        return;
-                    }
-                    SalePriceSave(sqlConnection,Id,size,price,number);
-
-                    // Refres datagridwiev
-                    dataTable= LoadParfumItems.LoadSalePriceDataTable(sqlConnection, false, Id);
-                    dataGridView1.DataSource = dataTable;
-
-
-                    RefresData.salePriceLists.ChangeData();
+                    size = Convert.ToInt32(combSize.SelectedItem.ToString().Trim());
+                    price = Convert.ToInt32(textPrice.Text.Trim());
+                    number = Convert.ToInt32(textNumber.Text.Trim());
                 }
-                LoadParfumItems.MessengeWarning(": Created");
+                catch 
+                {
+
+                    ParfumMessenge.Error("You Must Be Write Number");
+                    return;
+                }
+
+                int parfumId = ((ParfumHeader)combSearchName.SelectedItem).Id;
+                // Parfum to Sale Pirce
+                if (!IsAdd(size, parfumId))
+                {
+                    return;
+                }
+
+                var sizeId = LoadCommonData._db.Sizes.FirstOrDefault(dr => dr.Size1 == size).Id;
+                DataModelMsSql.SalePrice AddsalePrice = new DataModelMsSql.SalePrice()
+                {
+                    ParfumId = parfumId,
+                    SizeId = sizeId,
+                    Price = price,
+                    number = number
+                };
+
+                LoadCommonData._db.SalePrices.Add(AddsalePrice);
+                LoadCommonData._db.SaveChanges();
+                ChangeInfo();
+                ClearInfo();
+
+                // Refres datagridwiev
+                RefresData.salePriceLists.ChangeData();
+                ParfumMessenge.Warning($" Price Created");
             }
         }
 
-
-        // Sale Price Add
-        private void SalePriceSave(SqlConnection sqlConnection,int Id,int size,int price,int number)
-        {
-            
-            string commandMain = $"EXECUTE usp_InsertSalePrice @ParfumId= {Id}, @Size={size} ,@Price={price} ,@Number ={number}";
-            LoadParfumItems.DataBases(sqlConnection, commandMain,true);
-        }
 
         public void ChangeSize()
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-            {
-                LoadParfumItems.LoadSize(sqlConnection, true, combSize);
-            }
+            LoadCommonData.LoadSize(combSize);
         }
 
 
@@ -94,98 +101,116 @@ namespace ParfumUI
 
         private void combSearchName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+            ChangeInfo();
+            ClearInfo();
+        }
+
+        private void ChangeInfo()
+        {
+            
+            dataGridView1.Rows.Clear();
+            // Data Grid View Price List
+            int Id = ((ParfumHeader)combSearchName.SelectedItem).Id;
+            var salePriceList = LoadCommonData._db.SalePrices
+                .Where(dr => dr.ParfumId == Id)
+                .Select(fd=>new { 
+                    fd.Size.Size1,
+                    fd.Price,
+                    fd.number,
+                    fd.Id
+                })
+                .ToList();
+
+            foreach (var item in salePriceList)
             {
-                int Id = ((ParfumHeader)combSearchName.SelectedItem).Id;
-                dataTable= LoadParfumItems.LoadSalePriceDataTable(sqlConnection, true, Id);
-                dataGridView1.DataSource = dataTable;
+                dataGridView1.Rows.Add(item.Size1, item.Price, item.number, item.Id);
             }
         }
 
-        private bool IsAdd(int size)
+        private bool IsAdd(int size,int id)
         {
             bool isAdd = true;
-
-            foreach (DataRow row in dataTable.Rows)
+            var isAddedPrice = LoadCommonData._db.SalePrices.FirstOrDefault(dr => dr.ParfumId == id && dr.Size.Size1==size);
+            if(isAddedPrice != null)
             {
-                if(Convert.ToInt32(row["SizeML"]) == size)
-                {
-                    isAdd = false;
-                }
+                ParfumMessenge.Error("This Price Already Added");
+                isAdd = false;
             }
-
-
             return isAdd;
         }
 
         
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        // Data Grid View Price List
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 // Size Ml Problem
-                string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString();
-                string SizeML = dataGridView1.Rows[e.RowIndex].Cells["SizeML"].Value.ToString();
+                int id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                int SizeML = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["SizeML"].Value.ToString());
                 string Price = dataGridView1.Rows[e.RowIndex].Cells["Price"].Value.ToString();
-                string Count = dataGridView1.Rows[e.RowIndex].Cells["Count"].Value.ToString();
+                string Count = dataGridView1.Rows[e.RowIndex].Cells["PCount"].Value.ToString();
 
                 PriceId = id;
-                Size = SizeML;
+                PafumSize = SizeML;
                 combSize.SelectedItem = SizeML;
                 textPrice.Text = Price;
                 textNumber.Text = Count;
-
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Update"))
+            if (ParfumMessenge.IsAreYouSure(" Are You Sure Update?"))
             {
-                if (string.IsNullOrEmpty(PriceId))
+                if (PriceId == 0)
                 {
-                    LoadParfumItems.MessengeWarning("Pleac select price");
+                    ParfumMessenge.Warning("Pleac select price");
                     return;
                 }
-
-                int newsize = int.Parse(combSize.SelectedItem.ToString().Trim());
-                string price = textPrice.Text.Trim();
-                string count = textNumber.Text.Trim();
-
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+                int price;
+                int count;
+                try
                 {
-                    if (!IsAdd(newsize) && newsize !=int.Parse(Size))
+                    price = int.Parse(textPrice.Text.Trim());
+                    count = int.Parse(textNumber.Text.Trim());
+                }
+                catch 
+                {
+                    ParfumMessenge.Error("You Must be Write Number ");
+                    return;
+                }
+                
+                int ParfumId = ((ParfumHeader)combSearchName.SelectedItem).Id;
+                int newsize = int.Parse(combSize.SelectedItem.ToString().Trim());
+
+                var isAddedPrice = LoadCommonData._db.SalePrices.FirstOrDefault(dr=>dr.ParfumId == ParfumId && dr.Size.Size1 == newsize);
+                if (isAddedPrice!=null)
+                {
+                    if(PafumSize != newsize)
                     {
-                        MessageBox.Show("Is Already Added");
+                        ParfumMessenge.Error("This Price Already Added");
                         return;
                     }
-                    string commad = $"UPDATE SalePrice set SizeId=(select Id from Size where Size={newsize}),Price={price},number={count} where Id = {PriceId} ";
-
-                    LoadParfumItems.DataBases(sqlConnection, commad);
-
-                    // Refres data datagrid view
-                    ChangeData(sqlConnection, false);
-
-                    // SalePriceList Refres 
-                    RefresData.salePriceLists.ChangeData();
-                    LoadParfumItems.MessengeWarning("Udated");
                 }
-                PriceId = "";
+
+                int sizeId = LoadCommonData._db.Sizes.FirstOrDefault(dr => dr.Size1 == newsize).Id;
+                var updateParfumPrice = LoadCommonData._db.SalePrices.Find(PriceId);
+                if(updateParfumPrice != null)
+                {
+                    updateParfumPrice.SizeId = sizeId;
+                    updateParfumPrice.Price = price;
+                    updateParfumPrice.number = count;
+
+                    LoadCommonData._db.SaveChanges();
+                }
+
+                ChangeInfo();
+                // SalePriceList Refres 
+                RefresData.salePriceLists.ChangeData();
+
+                ParfumMessenge.Warning("Parfum Price Update");
+                ClearInfo();
             }
 
         }
@@ -201,28 +226,49 @@ namespace ParfumUI
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
-            if (LoadParfumItems.IsAreYouSure("Delete? If delete this price, deleted connectid sales"))
+            if (ParfumMessenge.IsAreYouSure("Are You Sure Delete? "))
             {
-                if (string.IsNullOrEmpty(PriceId))
+                if (PriceId==0)
                 {
-                    LoadParfumItems.MessengeWarning("Pleac select price");
+                    ParfumMessenge.Error("Pleac select price");
                     return;
                 }
-                string commad = "EXECUTE usp_DeletePrice @Id=" + PriceId;
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+
+                var isdeletePrice = LoadCommonData._db.Sales.FirstOrDefault(dr => dr.SalePriceId == PriceId);
+                if(isdeletePrice != null)
                 {
-                    LoadParfumItems.DataBases(sqlConnection, commad);
-
-                    //  Main List Refres
-                    RefresData.salePriceLists.ChangeData();
-
-                    // Refres data datagrid view
-                    ChangeData(sqlConnection, false);
-
-                    LoadParfumItems.MessengeWarning("Deleted");
+                    ParfumMessenge.Error("This Price Are Using");
+                    return;
                 }
-                PriceId = "";
+
+                var deletePrice = LoadCommonData._db.SalePrices.Find(PriceId);
+                if (deletePrice != null)
+                {
+                    LoadCommonData._db.SalePrices.Remove(deletePrice);
+                    LoadCommonData._db.SaveChanges();
+                }
+
+                ChangeInfo();
+                ClearInfo();
+                ParfumMessenge.Warning("Price Deleted");
+
             }
+        }
+
+        private void ClearInfo()
+        {
+            textNumber.Text = "";
+            textPrice.Text = "";
+            try
+            {
+                combSize.SelectedIndex = 0;
+            }
+            catch 
+            {
+            }
+           
+            PriceId = 0;
+            PafumSize = 0;
         }
     }
 }

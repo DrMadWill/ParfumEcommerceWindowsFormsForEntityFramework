@@ -1,4 +1,7 @@
-﻿using ParfumUI.Parfum.Load;
+﻿using ParfumUI.Common;
+using ParfumUI.DataModelMsSql;
+using ParfumUI.Load;
+using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
 using ParfumUI.Users;
 using System;
@@ -29,22 +32,33 @@ namespace ParfumUI.Users
 
         private void UserSaleMonitor_Load(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+            LoadCommonData.LoadCategory(combCatogory);
+
+
+            var userNames = LoadCommonData._db.Users
+                .Where(dr => dr.IsActive == true && dr.IsUser == true)
+                .Select(ds => ds.FullName).ToList();
+
+            combUser.Items.Clear();
+            foreach (var item in userNames)
             {
-                string command = "select Name from Catogory";
-                LoadParfumItems.LoadItem(sqlConnection, command, true, combCatogory);
-
-                string commandUsers = "select FullName from ActiveUserTable";
-                LoadParfumItems.LoadItem(sqlConnection, commandUsers, false, combUser);
-
-
-                string commands = "select * from SaleDetailParfum where PriceId=1";
-                table = LoadParfumItems.DataBeseRead(sqlConnection, commands, false);
-
-
+                combUser.Items.Add(item);
             }
             combUser.SelectedIndex = 0;
-            combCatogory.SelectedIndex = 0;
+            combUser.DropDownStyle = ComboBoxStyle.DropDownList;
+            combCatogory.DropDownStyle = ComboBoxStyle.DropDownList;
+            combEmploye.DropDownStyle = ComboBoxStyle.DropDownList;
+            var eploNames = LoadCommonData._db.Users
+                .Where(dr => dr.IsActive == true && dr.IsEmployee == true)
+                .Select(ds=>ds.FullName).ToList();
+
+            combEmploye.Items.Clear();
+            foreach (var item in eploNames)
+            {
+                combEmploye.Items.Add(item);
+            }
+            combEmploye.SelectedIndex = 0;
+
 
             ChangeData();
 
@@ -52,18 +66,9 @@ namespace ParfumUI.Users
 
         public void ChangeData()
         {
-
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-            {
-                dataGridViewShearch.DataSource = null;
-                
-                string command = "select * from SaleDetailParfum";
-
-                dataTableShearch = LoadParfumItems.DataBeseRead(sqlConnection, command, true);
-                dataGridViewShearch.DataSource = dataTableShearch;
-                textcatogory.Text = "All Parfums";
-
-            }
+            dataGridViewShearch.DataSource = null;
+            dataGridViewShearch.DataSource = LoadCommonData._db.SaleDetailParfums.ToList();
+            textcatogory.Text = "All Parfums";
         }
 
 
@@ -71,20 +76,20 @@ namespace ParfumUI.Users
         {
 
             string catogory = combCatogory.SelectedItem.ToString().Trim();
-
-            
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+            var ParfumIds = LoadCommonData._db.CategoryToParfums
+                .Where(dr => dr.Catogory.Name == catogory)
+                .Select(sd=>sd.ParfumId).ToList();
+            List<DataModelMsSql.SaleDetailParfum> sales = new List<DataModelMsSql.SaleDetailParfum>();
+            sales.Clear();
+            dataGridViewShearch.DataSource = null;
+            foreach (var parfumId in ParfumIds)
             {
-                dataGridViewShearch.DataSource = null;
-
-                
-                // Databses Info add
-                string command = "EXECUTE usp_SaleShowCategoryParfums '" + catogory + "'";
-                dataTableShearch= LoadParfumItems.DataBeseRead(sqlConnection, command, true);
-               
-                dataGridViewShearch.DataSource = dataTableShearch;
-                textcatogory.Text = catogory;
+                var parfums = LoadCommonData._db.SaleDetailParfums.Where(dr => dr.Id == parfumId);
+                sales.AddRange(parfums);
             }
+            dataGridViewShearch.DataSource = sales;
+            textcatogory.Text = catogory;
+
         }
 
         private void combCatogory_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,11 +108,9 @@ namespace ParfumUI.Users
         {
             if (dataGridViewShearch.SelectedRows.Count > 0)
             {
-                
                 string id = dataGridViewShearch.Rows[e.RowIndex].Cells["Id"].Value.ToString();
                 string PriceId = dataGridViewShearch.Rows[e.RowIndex].Cells["PriceId"].Value.ToString();
                 string Name = dataGridViewShearch.Rows[e.RowIndex].Cells["Name"].Value.ToString();
-                string Image = dataGridViewShearch.Rows[e.RowIndex].Cells["Image"].Value.ToString();
                 string Description = dataGridViewShearch.Rows[e.RowIndex].Cells["Description"].Value.ToString();
                 string Brend = dataGridViewShearch.Rows[e.RowIndex].Cells["Brend"].Value.ToString();
                 string Gender = dataGridViewShearch.Rows[e.RowIndex].Cells["Gender"].Value.ToString();
@@ -116,27 +119,23 @@ namespace ParfumUI.Users
                 string price = dataGridViewShearch.Rows[e.RowIndex].Cells["Price"].Value.ToString();
                 string Number = dataGridViewShearch.Rows[e.RowIndex].Cells["Number"].Value.ToString();
 
-
                 //Distinct
                 foreach (DataGridViewRow item in dataGridViewSales.Rows)
                 {
-                    
                     if (item.Cells["PriceId"].Value.ToString().Trim() == PriceId)
                     {
                         return;
                     }
                 }
-                dataGridViewSales.Rows.Add(id, PriceId, Name, Image, Description, Brend, Gender, Density, Size,price, Number, "");
-
                 
+                dataGridViewSales.Rows.Add(id, PriceId, Name, Description, Brend, Gender, Density, Size,price, Number, "");
             }
-
-            
         }
 
         
         private void btnClear_Click(object sender, EventArgs e)
         {
+            
             dataGridViewSales.Rows.Clear();
         }
 
@@ -144,68 +143,61 @@ namespace ParfumUI.Users
         {
             if (LoadParfumItems.IsAreYouSure())
             {
-                string PriceId = "";
-                string command = "";
-
+                
                 string UserName = combUser.SelectedItem.ToString();
-                string time = dateTimeSale.Value.ToString("yyyy-MM-dd");
-                int count = 0;
+                int userId = LoadCommonData._db.Users.FirstOrDefault(dr => dr.FullName.ToLower() == UserName.ToLower()).Id;
                 int basecount = 0;
-                int price = 0;
-                bool isfrist = true;
-                int total = 0;
-                string parfumname = "";
-                int datacount = dataGridViewSales.Rows.Count;
 
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+            IsEmptyDataGrid:;
+
+                // Foreach Last Elemet Prablem
+
+                foreach (DataGridViewRow row in dataGridViewSales.Rows)
                 {
-                IsEmptyDataGrid:;
-                    // Foreach Last Elemet Prablem
-                    foreach (DataGridViewRow row in dataGridViewSales.Rows)
+                    int saleCount = 0;
+                    DataModelMsSql.SalePrice Price;
+                    int PriceIdId = 0;
+                    try
                     {
-                        PriceId = row.Cells["PriceId"].Value.ToString().Trim();
-                        try
-                        {
-                            count = int.Parse(row.Cells["SaleCount"].Value.ToString().Trim());
-
-                        }
-                        catch (Exception err)
-                        {
-                            LoadParfumItems.MessengeWarning("PLease Count Add.");
-                            return;
-                        }
-                        basecount = int.Parse(row.Cells["BaseCount"].Value.ToString().Trim());
-                        price = int.Parse(row.Cells["ParfumPrice"].Value.ToString().Trim());
-                        parfumname = row.Cells["ParfumN"].Value.ToString().Trim();
-                        total = count * price;
-                        if (count > basecount)
-                        {
-                            LoadParfumItems.MessengeWarning("There is not so much perfume.");
-                            return;
-                        }
-
-                        if (count == 0 )
-                        {
-                            LoadParfumItems.MessengeWarning("PLease Count Add.");
-                            return;
-                        }
-                        command = $"EXECUTE usp_InsertSaleAdmin @Name='{UserName}',@SalePrice={PriceId},@Count={count},@Total={total},@Date='{time}'";
-                        if (isfrist)
-                        {
-                            LoadParfumItems.DataBases(sqlConnection, command, true);
-                            isfrist = false;
-                        }
-                        else
-                            LoadParfumItems.DataBases(sqlConnection, command, false);
-
-                        LoadParfumItems.MessengeWarning($": Parfum {parfumname} Saled ");
-                        dataGridViewSales.Rows.Remove(row);
-                        ChangeData();
+                        PriceIdId = int.Parse(row.Cells["PriceId"].Value.ToString().Trim());
+                        saleCount = int.Parse(row.Cells["SaleCount"].Value.ToString().Trim());
+                        Price = LoadCommonData._db.SalePrices.Find(PriceIdId);
+                    }
+                    catch 
+                    {
+                        LoadParfumItems.MessengeWarning("PLease Count Add.");
+                        return;
+                    }
+                     
+                   
+                    
+                    if (saleCount > Price.number)
+                    {
+                        
+                        ParfumMessenge.Error("There is not so much perfume.");
+                        return;
                     }
 
-                    if (dataGridViewSales.Rows.Count > 0)
-                        goto IsEmptyDataGrid;
+                    if (saleCount == 0)
+                    {
+                        ParfumMessenge.Error("PLease Count Add.");
+                        return;
+                    }
+
+                    Sale sale = new Sale()
+                    {
+                        SalePriceId = Price.Id,
+                        Date = dateTimeSale.Value,
+
+                    };
+
+                    LoadParfumItems.MessengeWarning($": Parfum {parfumname} Saled ");
+                    dataGridViewSales.Rows.Remove(row);
+                    ChangeData();
                 }
+
+                if (dataGridViewSales.Rows.Count > 0)
+                    goto IsEmptyDataGrid;
 
                 RefresData.salePriceLists.ChangeData();
             }
@@ -218,6 +210,7 @@ namespace ParfumUI.Users
             {
                 // Remove Dobul click elemet
                 dataGridViewSales.Rows.Remove(dataGridViewSales.Rows[e.RowIndex]);
+                
             }
         }
 
@@ -233,10 +226,8 @@ namespace ParfumUI.Users
                 if (loadnames.Contains(shrearchname))
                 {
                     table.Rows.Add(row.ItemArray);
-
                 }
             }
-
             dataGridViewShearch.DataSource = table;
         }
     }

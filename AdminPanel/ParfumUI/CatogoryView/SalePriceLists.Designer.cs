@@ -36,6 +36,7 @@ namespace ParfumUI.CatogoryView
             this.dataGridShearch = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.parfumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parfumParametrsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brendToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@ namespace ParfumUI.CatogoryView
             this.panel2 = new System.Windows.Forms.Panel();
             this.textLogin = new System.Windows.Forms.Label();
             this.textUser = new System.Windows.Forms.Label();
-            this.parfumParametrsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridShearch)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -163,26 +163,33 @@ namespace ParfumUI.CatogoryView
             this.parfumToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
             this.parfumToolStripMenuItem.Text = "Parfum";
             // 
+            // parfumParametrsToolStripMenuItem
+            // 
+            this.parfumParametrsToolStripMenuItem.Name = "parfumParametrsToolStripMenuItem";
+            this.parfumParametrsToolStripMenuItem.Size = new System.Drawing.Size(208, 30);
+            this.parfumParametrsToolStripMenuItem.Text = "Add and Edit";
+            this.parfumParametrsToolStripMenuItem.Click += new System.EventHandler(this.parfumParametrsToolStripMenuItem_Click);
+            // 
             // brendToolStripMenuItem1
             // 
             this.brendToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem3,
             this.editToolStripMenuItem1});
             this.brendToolStripMenuItem1.Name = "brendToolStripMenuItem1";
-            this.brendToolStripMenuItem1.Size = new System.Drawing.Size(251, 30);
+            this.brendToolStripMenuItem1.Size = new System.Drawing.Size(208, 30);
             this.brendToolStripMenuItem1.Text = "Brend";
             // 
             // addToolStripMenuItem3
             // 
             this.addToolStripMenuItem3.Name = "addToolStripMenuItem3";
-            this.addToolStripMenuItem3.Size = new System.Drawing.Size(224, 30);
+            this.addToolStripMenuItem3.Size = new System.Drawing.Size(133, 30);
             this.addToolStripMenuItem3.Text = "Add";
             this.addToolStripMenuItem3.Click += new System.EventHandler(this.addToolStripMenuItem3_Click);
             // 
             // editToolStripMenuItem1
             // 
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(224, 30);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(133, 30);
             this.editToolStripMenuItem1.Text = "Edit";
             this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
             // 
@@ -222,7 +229,7 @@ namespace ParfumUI.CatogoryView
             this.addToolStripMenuItem2,
             this.removeToolStripMenuItem});
             this.sectionToolStripMenuItem.Name = "sectionToolStripMenuItem";
-            this.sectionToolStripMenuItem.Size = new System.Drawing.Size(258, 30);
+            this.sectionToolStripMenuItem.Size = new System.Drawing.Size(229, 30);
             this.sectionToolStripMenuItem.Text = "Section";
             // 
             // addToolStripMenuItem2
@@ -242,8 +249,8 @@ namespace ParfumUI.CatogoryView
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(258, 30);
-            this.createToolStripMenuItem.Text = "Create and Update";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(229, 30);
+            this.createToolStripMenuItem.Text = "Create and Edit";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // userToolStripMenuItem
@@ -260,21 +267,21 @@ namespace ParfumUI.CatogoryView
             // userActivityToolStripMenuItem
             // 
             this.userActivityToolStripMenuItem.Name = "userActivityToolStripMenuItem";
-            this.userActivityToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
+            this.userActivityToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
             this.userActivityToolStripMenuItem.Text = "Login Users";
             this.userActivityToolStripMenuItem.Click += new System.EventHandler(this.userActivityToolStripMenuItem_Click);
             // 
             // acivityToolStripMenuItem
             // 
             this.acivityToolStripMenuItem.Name = "acivityToolStripMenuItem";
-            this.acivityToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
+            this.acivityToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
             this.acivityToolStripMenuItem.Text = "Sale Acivity";
             this.acivityToolStripMenuItem.Click += new System.EventHandler(this.acivityToolStripMenuItem_Click);
             // 
             // saleAddToolStripMenuItem
             // 
             this.saleAddToolStripMenuItem.Name = "saleAddToolStripMenuItem";
-            this.saleAddToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
+            this.saleAddToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
             this.saleAddToolStripMenuItem.Text = "Sale Add";
             this.saleAddToolStripMenuItem.Click += new System.EventHandler(this.saleAddToolStripMenuItem_Click);
             // 
@@ -365,6 +372,7 @@ namespace ParfumUI.CatogoryView
             // 
             this.textLogin.AutoSize = true;
             this.textLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textLogin.Location = new System.Drawing.Point(1264, 4);
             this.textLogin.Name = "textLogin";
             this.textLogin.Size = new System.Drawing.Size(168, 29);
@@ -375,18 +383,12 @@ namespace ParfumUI.CatogoryView
             // 
             this.textUser.AutoSize = true;
             this.textUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textUser.Location = new System.Drawing.Point(1089, 4);
             this.textUser.Name = "textUser";
             this.textUser.Size = new System.Drawing.Size(68, 29);
             this.textUser.TabIndex = 36;
             this.textUser.Text = "User";
-            // 
-            // parfumParametrsToolStripMenuItem
-            // 
-            this.parfumParametrsToolStripMenuItem.Name = "parfumParametrsToolStripMenuItem";
-            this.parfumParametrsToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
-            this.parfumParametrsToolStripMenuItem.Text = "Add and Edit";
-            this.parfumParametrsToolStripMenuItem.Click += new System.EventHandler(this.parfumParametrsToolStripMenuItem_Click);
             // 
             // SalePriceLists
             // 

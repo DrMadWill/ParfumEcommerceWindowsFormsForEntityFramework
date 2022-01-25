@@ -1,4 +1,4 @@
-﻿using ParfumUI.DataMsSqlModel;
+﻿using ParfumUI.DataModelMsSql;
 using ParfumUI.Load;
 using ParfumUI.Parfum.Brend;
 using ParfumUI.Parfum.Load;
@@ -21,10 +21,7 @@ namespace ParfumUI.CatogoryView
 {
     public partial class SalePriceLists : Form
     {
-        DataTable dataTable = new DataTable();
 
-        DataTable dataTableShearch = new DataTable();
-        string connectionString = ConfigurationManager.ConnectionStrings["ParfumUI.Properties.Settings.Setting"].ConnectionString;
         private string _username;
         public string UserName { get { return _username; } }
 

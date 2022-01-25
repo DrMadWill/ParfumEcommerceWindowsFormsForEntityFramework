@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ParfumUI.DataMsSqlModel;
 using ParfumUI.Load;
 using ParfumUI.Common;
 
@@ -122,7 +121,7 @@ namespace ParfumUI.Parfum.Brend
                 }
 
                 // Find
-                DataMsSqlModel.Brend parfum_Brend = LoadCommonData._db.Brends.FirstOrDefault(a => a.Name.Trim() == brend_name);
+                DataModelMsSql.Brend parfum_Brend = LoadCommonData._db.Brends.FirstOrDefault(a => a.Name.Trim() == brend_name);
                 if (parfum_Brend != null)
                 {
                     parfum_Brend.Name = new_brend_name;

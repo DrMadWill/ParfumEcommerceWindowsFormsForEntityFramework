@@ -11,9 +11,6 @@ namespace ParfumUI
     {
         public static BrendAdd brendAdd;
 
-        // Parfum Add Panel Change  - Brend Add
-        public static ParfumAdd parfumAdd;
-
         // Parfum Update Change - Brend Add
         public static ParfumeUpdate parfumeUpdate;
 

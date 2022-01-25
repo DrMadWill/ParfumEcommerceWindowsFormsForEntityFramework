@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ParfumUI.Load;
+using ParfumUI.Common;
 
 namespace ParfumUI.SalePriceFolder.Volume
 {
@@ -20,29 +22,83 @@ namespace ParfumUI.SalePriceFolder.Volume
         {
             InitializeComponent();
         }
-        string connectionString = ConfigurationManager.ConnectionStrings["ParfumUI.Properties.Settings.Setting"].ConnectionString;
-
-
         private void btnVolumeAdd_Click(object sender, EventArgs e)
         {
-            int volume = Convert.ToInt32(textVolume.Text.Trim());
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            int volume;
+            try
             {
-                VolumeAddItem(sqlConnection, volume);
+                volume = Convert.ToInt32(textVolume.Text.Trim());
+            }
+            catch
+            {
+                ParfumMessenge.Error("You Must Be Write Number");
+                return;
+            }
+            if(ParfumMessenge.IsAreYouSure($"Are You Sure Add {volume}"))
+            {
+                if (IsAddedSize(volume))
+                {
+                    return;
+                }
+                DataModelMsSql.Size size = new DataModelMsSql.Size()
+                {
+                    Size1 = volume
+                };
+                LoadCommonData._db.Sizes.Add(size);
+                LoadCommonData._db.SaveChanges();
+                textVolume.Text = "";
+                LoadCommonData.LoadSize(combSize);
+                ParfumMessenge.Warning($"{volume} Added");
             }
         }
 
-        private void VolumeAddItem(SqlConnection sqlConnection,int volume)
-        {  
-            string commad = $"Insert into Size(Size)values({volume})";
-            using (SqlCommand sqlCommand = new SqlCommand(commad, sqlConnection))
+        private void VolumeAdd_Load(object sender, EventArgs e)
+        {
+            LoadCommonData.LoadSize(combSize);
+        }
+
+        private void btnSizeUpdate_Click(object sender, EventArgs e)
+        {
+            int oldsize;
+            int newsize;
+            try
             {
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-                RefresData.salePrice.ChangeSize();
-                MessageBox.Show("Information added", "Add", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textVolume.Text = "";
+                oldsize = int.Parse(combSize.SelectedItem.ToString());
+                newsize = int.Parse(textVolume.Text);
             }
+            catch
+            {
+                ParfumMessenge.Error("You Must Be Write Number");
+                return;
+            }
+            if (ParfumMessenge.IsAreYouSure($"Are You Sure Update {oldsize}?"))
+            {
+                if (IsAddedSize(newsize))
+                {
+                    return;
+                }
+
+                var updatesize = LoadCommonData._db.Sizes.FirstOrDefault(dr => dr.Size1 == oldsize);
+                if (updatesize != null)
+                {
+                    updatesize.Size1 = newsize;
+                }
+                LoadCommonData._db.SaveChanges();
+                ParfumMessenge.Warning($"{oldsize} Size Updated");
+                LoadCommonData.LoadSize(combSize);
+            }
+        }
+
+        private bool IsAddedSize(int size)
+        {
+            bool isadded = false;
+            var isAddedSize = LoadCommonData._db.Sizes.FirstOrDefault(dr => dr.Size1 == size);
+            if (isAddedSize != null || size==0)
+            {
+                ParfumMessenge.Error("Is Already Added or You Write Number=> 0");
+                isadded = true;
+            }
+            return isadded;
         }
     }
 }

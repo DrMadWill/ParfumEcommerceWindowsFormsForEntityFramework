@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ParfumUI.DataMsSqlModel;
+using ParfumUI.DataModelMsSql;
 using ParfumUI.Load;
 using ParfumUI.Parfum.Load;
 
@@ -41,10 +41,15 @@ namespace ParfumUI
                 //Save
                 LoadCommonData._db.SaveChanges();
 
-                LoadParfumItems.MessengeWarning("Created");
+                LoadParfumItems.MessengeWarning("Brend Created");
                 textName.Text = "";
                 textDescript.Text = "";
             }
+        }
+
+        private void BrendAdd_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

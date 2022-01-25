@@ -1,4 +1,7 @@
-﻿using ParfumUI.Parfum.Load;
+﻿using ParfumUI.Common;
+using ParfumUI.DataModelMsSql;
+using ParfumUI.Load;
+using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
 using System;
 using System.Collections.Generic;
@@ -27,53 +30,123 @@ namespace ParfumUI.CatogoryView
 
         private void CategoryChange()
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-                LoadParfumItems.LoadCategory(sqlConnection, true, combCategory);
+            LoadCommonData.LoadCategory(combCategory);
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Create"))
+            string newname = textNewCategrory.Text.Trim();
+            if (string.IsNullOrEmpty(newname))
             {
-                string newname = textNewCategrory.Text.Trim();
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
-                {
-                    string command =$"insert into Catogory(Name) values('{newname}')";
-                    // Create Info
-                    LoadParfumItems.DataBases(sqlConnection, command);
-
-                    // Messenge go
-                    LoadParfumItems.MessengeWarning("Created");
-
-                    //Refres Data
-                    CategoryChange();
-
-                    RefresData.salePriceLists.LoadCatogory();
-                }
+                ParfumMessenge.Error("You Must Write New Name!");
+                return;
             }
+            if (ParfumMessenge.IsAreYouSure($"Are Sure Create Category {newname}"))
+            {
+                if (IsAddedCategory(newname))
+                {
+                    return;
+                }
+                
+
+                Catogory catogory = new Catogory()
+                {
+                    Name = newname
+                };
+                // Add
+                LoadCommonData._db.Catogories.Add(catogory);
+                // Save
+                LoadCommonData._db.SaveChanges();
+
+                ParfumMessenge.Warning($"Category {newname} Created");
+
+                //Refres Data
+                CategoryChange();
+                // Refres Main Menu
+                RefresData.salePriceLists.LoadCatogory();
+            }
+        }
+
+
+        public bool IsAddedCategory(string newname)
+        {
+
+            // Check Category Name Added
+            bool isadded = false;
+            var categoryAdded = LoadCommonData._db.Catogories.FirstOrDefault(dr => dr.Name.Trim().ToLower() == newname.ToLower());
+            if (categoryAdded != null)
+            {
+                ParfumMessenge.Error("This Category Already Added");
+            }
+
+            return isadded;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Create"))
+
+            string oldname = combCategory.SelectedItem.ToString().Trim();
+            if (ParfumMessenge.IsAreYouSure($"Are Sure Update {oldname}"))
             {
-                string oldname = combCategory.SelectedItem.ToString().Trim(); 
+                
                 string newname = textNewCategrory.Text.Trim();
-                using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+                if (string.IsNullOrEmpty(newname))
                 {
-                    string command = $"Update Catogory set Name='{newname}' where Name='{oldname}'";
-
-                    // Update Info
-                    LoadParfumItems.DataBases(sqlConnection, command);
-
-                    LoadParfumItems.MessengeWarning("Updated.");
-
-                    //Refres Data
-                    CategoryChange();
-
-                    RefresData.salePriceLists.LoadCatogory();
+                    ParfumMessenge.Error("Information Must be Added!");
+                    return;
                 }
+
+                var updatecategory = LoadCommonData._db.Catogories.FirstOrDefault(dr => dr.Name.ToLower() == oldname.ToLower());
+                if (updatecategory != null)
+                {
+                    updatecategory.Name = newname;
+                }
+                else
+                    ParfumMessenge.Error("Not Found This Category");
+
+
+                LoadCommonData._db.SaveChanges();
+                ParfumMessenge.Warning($"{newname} Updated.");
+
+                //Refres Data
+                CategoryChange();
+                RefresData.salePriceLists.LoadCatogory();
+
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string oldname = combCategory.SelectedItem.ToString().Trim();
+            if (string.IsNullOrEmpty(oldname))
+            {
+                ParfumMessenge.Error("You Must Write New Name ");
+                return;
+            }
+
+            if(ParfumMessenge.IsAreYouSure($"Are You Sure Delete {oldname}"))
+            {
+                var usingCategory = LoadCommonData._db.CategoryToParfums.FirstOrDefault(dr => dr.Catogory.Name.Trim().ToLower() == oldname.ToLower());
+                if (usingCategory != null)
+                {
+                    ParfumMessenge.Error("This Category Are Using");
+                    return;
+                }
+
+                var category = LoadCommonData._db.Catogories.FirstOrDefault(dr => dr.Name.ToLower() == oldname.ToLower());
+                if (category != null)
+                {
+                    // Delete Elemenent
+                    LoadCommonData._db.Catogories.Remove(category);
+                    LoadCommonData._db.SaveChanges();
+                    ParfumMessenge.Warning($"{oldname} Deleted");
+                    CategoryChange();
+                }
+                else
+                    ParfumMessenge.Error("Not Found This Category");
+            }
+
+
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using ParfumUI.Common;
-using ParfumUI.DataMsSqlModel;
+using ParfumUI.DataModelMsSql;
 using ParfumUI.Load;
 using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
