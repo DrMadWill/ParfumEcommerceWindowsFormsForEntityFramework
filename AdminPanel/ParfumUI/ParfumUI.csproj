@@ -230,21 +230,13 @@
     <Compile Include="DataModelMsSql\usp_ShowCategoryParfums_Result.cs">
       <DependentUpon>ParfumDBFirstModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Load\LoadCommonData.cs" />
-    <Compile Include="Load\LoadParfumItems.cs" />
     <Compile Include="Parfum\Brend\BrendUpdateDelete.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Parfum\Brend\BrendUpdateDelete.Designer.cs">
       <DependentUpon>BrendUpdateDelete.cs</DependentUpon>
     </Compile>
-    <Compile Include="Parfum\Parfum.cs" />
     <Compile Include="RefresData.cs" />
     <Compile Include="Parfum\Brend\BrendAdd.cs">
       <SubType>Form</SubType>
@@ -278,9 +270,14 @@
     <Compile Include="SalePriceFolder\Volume\VolumeAdd.Designer.cs">
       <DependentUpon>VolumeAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlModel\CatogoryData.cs" />
-    <Compile Include="SqlModel\ParfumHeader.cs" />
-    <Compile Include="SqlModel\SalePriceData.cs" />
+    <Compile Include="SinginParfumApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SinginParfumApp.Designer.cs">
+      <DependentUpon>SinginParfumApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParfumHeader.cs" />
+    <Compile Include="Users\Cryptography.cs" />
     <Compile Include="Users\UserActivity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,9 +308,6 @@
     <EmbeddedResource Include="CatogoryView\SalePriceLists.resx">
       <DependentUpon>SalePriceLists.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Parfum\Brend\BrendAdd.resx">
       <DependentUpon>BrendAdd.cs</DependentUpon>
     </EmbeddedResource>
@@ -340,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalePriceFolder\Volume\VolumeAdd.resx">
       <DependentUpon>VolumeAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SinginParfumApp.resx">
+      <DependentUpon>SinginParfumApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\UserActivity.resx">
       <DependentUpon>UserActivity.cs</DependentUpon>

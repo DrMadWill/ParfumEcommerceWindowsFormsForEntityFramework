@@ -1,5 +1,4 @@
-﻿using ParfumUI.Parfum.Load;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -33,30 +32,26 @@ namespace ParfumUI.Parfum.Brend
 
         private void combSearchName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(LoadParfumItems.connectionString))
+            string brend_name = "";
+            try
             {
-                string brend_name = "";
-                try
-                {
-                    brend_name = combBrend.SelectedItem.ToString().Trim();
-                }
-                catch (Exception ex)
-                {
+                brend_name = combBrend.SelectedItem.ToString().Trim();
+            }
+            catch
+            {
+                return;
+            }
 
-                }
+            if (string.IsNullOrEmpty(brend_name))
+            {
+                return;
+            }
 
-                if (string.IsNullOrEmpty(brend_name))
-                {
-                    return;
-                }
-
-                var parfumBrend = LoadCommonData._db.Brends.FirstOrDefault(sa => sa.Name.Trim().ToLower() == brend_name.Trim().ToLower());
-                if (parfumBrend != null)
-                {
-                    textName.Text = parfumBrend.Name;
-                    textDescript.Text = parfumBrend.Decription;
-                }
-
+            var parfumBrend = LoadCommonData._db.Brends.FirstOrDefault(sa => sa.Name.Trim().ToLower() == brend_name.Trim().ToLower());
+            if (parfumBrend != null)
+            {
+                textName.Text = parfumBrend.Name;
+                textDescript.Text = parfumBrend.Decription;
             }
         }
 
@@ -64,7 +59,7 @@ namespace ParfumUI.Parfum.Brend
         // Delete Brend
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Delete"))
+            if (ParfumMessenge.IsAreYouSure("Are You Sure Delete?"))
             {
                 string brend_name = combBrend.SelectedItem.ToString().Trim().ToLower();
 
@@ -108,7 +103,7 @@ namespace ParfumUI.Parfum.Brend
         // Brend Updated
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (LoadParfumItems.IsAreYouSure("Updated")) 
+            if (ParfumMessenge.IsAreYouSure("Updated")) 
             {
                 string brend_name = combBrend.SelectedItem.ToString().Trim();
                 string new_brend_name = textName.Text.Trim();
@@ -134,7 +129,7 @@ namespace ParfumUI.Parfum.Brend
                 LoadCommonData.LoadBrend(combBrend);
                 combBrend.SelectedIndex = 0;
 
-                LoadParfumItems.MessengeWarning(":Brend Update");
+                ParfumMessenge.Warning("Brend Update");
             }
         }
     }

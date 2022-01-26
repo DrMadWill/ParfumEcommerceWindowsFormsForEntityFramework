@@ -9,17 +9,8 @@ namespace ParfumUI
 {
     public static class RefresData
     {
-        public static BrendAdd brendAdd;
-
-        // Parfum Update Change - Brend Add
-        public static ParfumeUpdate parfumeUpdate;
-
         // Parfum Function Change - Parfum Add, Parfum Update, Parfum Delete 
         public static Parfum_Function parfum_Function;
-
-        // Sale Price 
-        public static SalePrice salePrice;
-
 
         // Sale Price List
         public static SalePriceLists salePriceLists;

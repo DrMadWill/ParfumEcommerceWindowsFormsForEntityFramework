@@ -267,21 +267,21 @@ namespace ParfumUI.CatogoryView
             // userActivityToolStripMenuItem
             // 
             this.userActivityToolStripMenuItem.Name = "userActivityToolStripMenuItem";
-            this.userActivityToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+            this.userActivityToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
             this.userActivityToolStripMenuItem.Text = "Login Users";
             this.userActivityToolStripMenuItem.Click += new System.EventHandler(this.userActivityToolStripMenuItem_Click);
             // 
             // acivityToolStripMenuItem
             // 
             this.acivityToolStripMenuItem.Name = "acivityToolStripMenuItem";
-            this.acivityToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+            this.acivityToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
             this.acivityToolStripMenuItem.Text = "Sale Acivity";
             this.acivityToolStripMenuItem.Click += new System.EventHandler(this.acivityToolStripMenuItem_Click);
             // 
             // saleAddToolStripMenuItem
             // 
             this.saleAddToolStripMenuItem.Name = "saleAddToolStripMenuItem";
-            this.saleAddToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+            this.saleAddToolStripMenuItem.Size = new System.Drawing.Size(197, 30);
             this.saleAddToolStripMenuItem.Text = "Sale Add";
             this.saleAddToolStripMenuItem.Click += new System.EventHandler(this.saleAddToolStripMenuItem_Click);
             // 
@@ -370,6 +370,7 @@ namespace ParfumUI.CatogoryView
             // 
             // textLogin
             // 
+            this.textLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textLogin.AutoSize = true;
             this.textLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -381,6 +382,7 @@ namespace ParfumUI.CatogoryView
             // 
             // textUser
             // 
+            this.textUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textUser.AutoSize = true;
             this.textUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;

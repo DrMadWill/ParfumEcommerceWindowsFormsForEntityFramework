@@ -1,6 +1,5 @@
 ﻿using ParfumUI.Common;
 using ParfumUI.Load;
-using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
 using ParfumUI.Users;
 using System;
@@ -19,7 +18,6 @@ namespace ParfumUI.Users
 {
     public partial class UserActivityMonitor : Form
     {
-        List<string> SalesId = new List<string>();
         public UserActivityMonitor()
         {
             InitializeComponent();
@@ -27,13 +25,13 @@ namespace ParfumUI.Users
 
         private void UserActivityMonitor_Load(object sender, EventArgs e)
         {
-            dataGridShearch.DataSource = LoadCommonData._db.SaleActivityMonitors.ToList();
+            ChangeDate();
             var uusers = LoadCommonData._db.Users 
-                .Where(sd=>sd.IsActive==true && sd.IsUser==true)
+                .Where(sd=> sd.IsUser==true)
                 .Select(dr => dr.FullName);
 
             var employees = LoadCommonData._db.Users
-                .Where(dr => dr.IsActive == true && dr.IsEmployee == true)
+                .Where(dr => dr.IsEmployee == true)
                 .Select(sd => sd.FullName);
 
             foreach (var user in uusers)
@@ -50,6 +48,10 @@ namespace ParfumUI.Users
             combUser.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        private void ChangeDate()
+        {
+            dataGridShearch.DataSource = LoadCommonData._db.SaleActivityMonitors.ToList();
+        }
 
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -59,29 +61,20 @@ namespace ParfumUI.Users
             DateTime lasttime =  dateLastTime.Value;
 
 
-            if (checkUser.Checked)
+            if (checkUser.Checked && combUser.SelectedItem != null)
             {
-                
-                if (combUser.SelectedItem!=null)
-                {
-                    string userName = combUser.SelectedItem.ToString();
-                    dataGridShearch.DataSource = SearchActivity(userName, startdate, lasttime);
-                }
-                else
-                    dataGridShearch.DataSource = null;
-
+                string userName = combUser.SelectedItem.ToString();
+                dataGridShearch.DataSource = SearchActivity(userName, startdate, lasttime);
             }
-            else if(checkEmp.Checked)
+            else if(checkEmp.Checked && combEmployee.SelectedItem != null)
             {
-                
-                if (combEmployee.SelectedItem != null)
-                {
-                    string emploName = combEmployee.SelectedItem.ToString();
-                    dataGridShearch.DataSource = SearchActivity(emploName, startdate, lasttime);
-                }
-                else
-                    dataGridShearch.DataSource = null;
-
+                string emploName = combEmployee.SelectedItem.ToString();
+                dataGridShearch.DataSource = SearchActivity(emploName, startdate, lasttime);
+            }
+            else
+            {
+                ParfumMessenge.Error("Select User Or Emloyee");
+                dataGridShearch.DataSource = null;
             }
 
         }
@@ -178,10 +171,14 @@ namespace ParfumUI.Users
                     goto IsEmptyDataGrid;
                 RefresData.salePriceLists.ChangeData();
                 ParfumMessenge.Warning("Parfum Sales Deleted.");
+                ChangeDate();
             }
 
         }
 
-
+        private void btnReferes_Click(object sender, EventArgs e)
+        {
+            dataGridShearch.DataSource = LoadCommonData._db.SaleActivityMonitors.ToList();
+        }
     }
 }

@@ -1,6 +1,6 @@
-﻿using ParfumUI.DataModelMsSql;
+﻿using ParfumUI.Common;
+using ParfumUI.DataModelMsSql;
 using ParfumUI.SalePriceFolder;
-using ParfumUI.SqlModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -132,6 +132,33 @@ namespace ParfumUI.Load
             }
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.SelectedIndex = 0;
+        }
+
+
+        public static bool CheckLogin(string login)
+        {
+
+            bool isUsable = false;
+            // Login Check
+            if (login.Length >= 75 || login.Length <= 10)
+            {
+                ParfumMessenge.Error("Login So Sort or Long");
+                isUsable = true;
+            }
+            return isUsable;
+        }
+
+        public static bool CheckPassword(string password)
+        {
+            bool isUsable = false;
+            // Pasword Check
+            if (password.Length >= 75 || password.Length <= 8 || !password.Any(char.IsUpper) || !password.Any(char.IsLower) || !password.Any(char.IsDigit))
+            {
+                ParfumMessenge.Error($"This {password} Not usable. Upper and Lower Letter and Digit add");
+                isUsable = true;
+            }
+
+            return isUsable;
         }
 
     }

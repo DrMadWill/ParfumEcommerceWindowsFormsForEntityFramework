@@ -1,7 +1,6 @@
 ﻿using ParfumUI.Common;
 using ParfumUI.DataModelMsSql;
 using ParfumUI.Load;
-using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
 using System;
 using System.Collections.Generic;
@@ -61,7 +60,13 @@ namespace ParfumUI.CatogoryView
                 int categoryId = 0;
                 string categoryName = "";
 
-                int parfumToCategoryId = LoadCommonData._db.CategoryToParfums.FirstOrDefault(dr => dr.ParfumId == parfumId).Id;
+
+                // Check Add  
+                
+                var categoryIdes = LoadCommonData._db
+                .CategoryToParfums
+                .Where(dr => dr.ParfumId == parfumId)
+                .Select(us => us.CategoryId).ToList();
 
                 CategoryToParfum toParfum = new CategoryToParfum();
                 for (int i = 0; i < names.Length; i++)
@@ -72,17 +77,24 @@ namespace ParfumUI.CatogoryView
                     }
                     categoryName = names[i];
                     categoryId = LoadCommonData._db.Catogories.FirstOrDefault(dr => dr.Name.Trim().ToLower() == categoryName).Id;
+
+                    bool isAdded = false;
+                    foreach (var item in categoryIdes)
+                    {
+                        if (item == categoryId)
+                            isAdded = true;
+                    }
+                    if (isAdded)
+                        continue;
+
+
                     if (categoryId != 0)
                     {
-                        if (categoryId == parfumToCategoryId)
-                        {
-                            continue;
-                        }   
-
                         toParfum.CategoryId = categoryId;
                         toParfum.ParfumId = parfumId;
                         LoadCommonData._db.CategoryToParfums.Add(toParfum);
                         LoadCommonData._db.SaveChanges();
+                        ChangeData();
                     }
 
                 }
@@ -95,15 +107,19 @@ namespace ParfumUI.CatogoryView
 
         private void combSearchName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ChangeData();
+        }
+
+        private void ChangeData()
+        {
             dataGridListCategory.Rows.Clear();
             int parfumId = ((ParfumHeader)combSearchName.SelectedItem).Id;
             var parfums = LoadCommonData._db.CategoryToParfums.Where(dr => dr.ParfumId == parfumId)
-                .Select(sd => sd.Catogory.Name).ToList().Distinct();//Distinct Sil
+                .Select(sd => sd.Catogory.Name).ToList();//Distinct Sil
             foreach (var item in parfums)
             {
                 dataGridListCategory.Rows.Add(item);
             }
-
         }
     }
 }

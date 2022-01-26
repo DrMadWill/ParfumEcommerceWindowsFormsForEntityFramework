@@ -1,6 +1,5 @@
 ﻿using ParfumUI.Common;
 using ParfumUI.Load;
-using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder.Volume;
 using System;
 using System.Collections.Generic;
@@ -213,14 +212,6 @@ namespace ParfumUI
                 ClearInfo();
             }
 
-        }
-
-        public void ChangeData(SqlConnection sqlConnection,bool isConnect)
-        {
-            int Id = ((ParfumHeader)combSearchName.SelectedItem).Id;
-            // Refres datagridwiev
-            dataTable = LoadParfumItems.LoadSalePriceDataTable(sqlConnection, isConnect, Id);
-            dataGridView1.DataSource = dataTable;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

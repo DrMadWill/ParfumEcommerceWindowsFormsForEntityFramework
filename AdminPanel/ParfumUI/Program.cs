@@ -1,4 +1,5 @@
 ﻿using ParfumUI.CatogoryView;
+using ParfumUI.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,7 @@ namespace ParfumUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            SalePriceLists salePriceLists = new SalePriceLists("MadWill");
-            RefresData.salePriceLists = salePriceLists;
-            Application.Run(salePriceLists);
+            Application.Run(new SinginParfumApp());
         }
     }
 }

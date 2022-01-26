@@ -1,7 +1,6 @@
 ﻿using ParfumUI.DataModelMsSql;
 using ParfumUI.Load;
 using ParfumUI.Parfum.Brend;
-using ParfumUI.Parfum.Load;
 using ParfumUI.SalePriceFolder;
 using ParfumUI.Users;
 using System;
@@ -25,7 +24,8 @@ namespace ParfumUI.CatogoryView
         private string _username;
         public string UserName { get { return _username; } }
 
-        
+        List<FullDetailParfum> fulls = new List<FullDetailParfum>();
+
         public SalePriceLists(string admin_name)
         {
             InitializeComponent();
@@ -38,7 +38,12 @@ namespace ParfumUI.CatogoryView
             textUser.Text = UserName;
             LoadCatogory();
             ChangeData();
-            
+
+            LoginUserChange();
+        }
+
+        public void LoginUserChange()
+        {
             textLogin.Text = "Login Access : " + LoadCommonData._db.ParfumLoginUsers.Count();
         }
 
@@ -48,8 +53,8 @@ namespace ParfumUI.CatogoryView
             dataGridView1.DataSource = null;
             dataGridShearch.DataSource = null;
 
-
-            dataGridView1.DataSource = LoadCommonData._db.FullDetailParfums.ToList();
+            fulls= LoadCommonData._db.FullDetailParfums.ToList();
+            dataGridView1.DataSource = fulls;
             textcatogory.Text = "All Parfums";
             
         }
@@ -61,8 +66,19 @@ namespace ParfumUI.CatogoryView
 
             dataGridShearch.DataSource=null; ;
             string name = textSearchName.Text.Trim();
-            var parfumitems = LoadCommonData._db.FullDetailParfums.Where(dr => dr.Name.Trim().ToLower().Contains(name.ToLower())).ToList();
-            dataGridShearch.DataSource = parfumitems;
+            if (string.IsNullOrEmpty(name))
+                return;
+            List<FullDetailParfum> searchParfims = new List<FullDetailParfum>();
+            searchParfims.Clear();
+            foreach (var item in fulls)
+            {
+                if (item.Name.Trim().ToLower().Contains(name.ToLower()))
+                {
+                    searchParfims.Add(item);
+                }
+            }
+            dataGridShearch.DataSource = searchParfims;
+
         }
 
         
@@ -73,7 +89,6 @@ namespace ParfumUI.CatogoryView
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalePrice salePrice = new SalePrice();
-            RefresData.salePrice = salePrice;
             salePrice.ShowDialog();
         }
 
@@ -111,13 +126,12 @@ namespace ParfumUI.CatogoryView
             var parfumIds = LoadCommonData._db.CategoryToParfums.Where(dr => dr.Catogory.Name == catogory).Select(sd=>sd.ParfumId);
             dataGridView1.DataSource = null;
             dataGridShearch.DataSource = null; ;
-
-            List<FullDetailParfum> detailParfums = new List<FullDetailParfum>();
+            fulls.Clear();
             foreach (var item in parfumIds)
             {
-                detailParfums.AddRange(LoadCommonData._db.FullDetailParfums.Where(dr=>dr.Id==item).ToList());
+                fulls.AddRange(LoadCommonData._db.FullDetailParfums.Where(dr=>dr.Id==item).ToList());
             }
-            dataGridView1.DataSource = detailParfums;
+            dataGridView1.DataSource = fulls;
             textcatogory.Text = catogory;
 
         }

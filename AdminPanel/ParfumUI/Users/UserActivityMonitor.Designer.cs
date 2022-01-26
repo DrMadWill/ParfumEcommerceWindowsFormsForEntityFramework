@@ -65,6 +65,7 @@ namespace ParfumUI.Users
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnReferes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridShearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDelete)).BeginInit();
             this.panel1.SuspendLayout();
@@ -94,19 +95,19 @@ namespace ParfumUI.Users
             this.dataGridShearch.ReadOnly = true;
             this.dataGridShearch.RowHeadersWidth = 51;
             this.dataGridShearch.RowTemplate.Height = 24;
-            this.dataGridShearch.Size = new System.Drawing.Size(1546, 285);
+            this.dataGridShearch.Size = new System.Drawing.Size(1546, 322);
             this.dataGridShearch.TabIndex = 31;
             this.dataGridShearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridShearch_CellDoubleClick);
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSearch.Location = new System.Drawing.Point(22, 31);
+            this.btnSearch.Location = new System.Drawing.Point(26, 50);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(149, 48);
+            this.btnSearch.Size = new System.Drawing.Size(125, 43);
             this.btnSearch.TabIndex = 30;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -153,7 +154,7 @@ namespace ParfumUI.Users
             this.dateStartTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateStartTime.Location = new System.Drawing.Point(18, 47);
             this.dateStartTime.Name = "dateStartTime";
-            this.dateStartTime.Size = new System.Drawing.Size(402, 30);
+            this.dateStartTime.Size = new System.Drawing.Size(401, 30);
             this.dateStartTime.TabIndex = 54;
             // 
             // label3
@@ -341,7 +342,7 @@ namespace ParfumUI.Users
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.51857F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 275F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             this.tableLayoutPanel1.Controls.Add(this.panel6, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel5, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 2, 0);
@@ -361,10 +362,11 @@ namespace ParfumUI.Users
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.Controls.Add(this.btnReferes);
             this.panel6.Controls.Add(this.btnSearch);
-            this.panel6.Location = new System.Drawing.Point(1393, 3);
+            this.panel6.Location = new System.Drawing.Point(1392, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(174, 96);
+            this.panel6.Size = new System.Drawing.Size(175, 96);
             this.panel6.TabIndex = 58;
             // 
             // panel5
@@ -375,7 +377,7 @@ namespace ParfumUI.Users
             this.panel5.Controls.Add(this.checkEmp);
             this.panel5.Controls.Add(this.combEmployee);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(1118, 3);
+            this.panel5.Location = new System.Drawing.Point(1117, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(269, 96);
             this.panel5.TabIndex = 59;
@@ -425,7 +427,7 @@ namespace ParfumUI.Users
             this.panel4.Controls.Add(this.checkUser);
             this.panel4.Controls.Add(this.combUser);
             this.panel4.Controls.Add(this.label1);
-            this.panel4.Location = new System.Drawing.Point(852, 3);
+            this.panel4.Location = new System.Drawing.Point(851, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(260, 96);
             this.panel4.TabIndex = 58;
@@ -450,7 +452,7 @@ namespace ParfumUI.Users
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.dateLastTime);
             this.panel3.Controls.Add(this.label5);
-            this.panel3.Location = new System.Drawing.Point(432, 3);
+            this.panel3.Location = new System.Drawing.Point(431, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(414, 96);
             this.panel3.TabIndex = 58;
@@ -464,7 +466,7 @@ namespace ParfumUI.Users
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(423, 96);
+            this.panel2.Size = new System.Drawing.Size(422, 96);
             this.panel2.TabIndex = 58;
             // 
             // tableLayoutPanel2
@@ -495,6 +497,20 @@ namespace ParfumUI.Users
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1564, 72);
             this.panel7.TabIndex = 64;
+            // 
+            // btnReferes
+            // 
+            this.btnReferes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReferes.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnReferes.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReferes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnReferes.Location = new System.Drawing.Point(26, 0);
+            this.btnReferes.Name = "btnReferes";
+            this.btnReferes.Size = new System.Drawing.Size(125, 44);
+            this.btnReferes.TabIndex = 31;
+            this.btnReferes.Text = "Refres";
+            this.btnReferes.UseVisualStyleBackColor = false;
+            this.btnReferes.Click += new System.EventHandler(this.btnReferes_Click);
             // 
             // UserActivityMonitor
             // 
@@ -565,5 +581,6 @@ namespace ParfumUI.Users
         private System.Windows.Forms.CheckBox checkUser;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btnReferes;
     }
 }

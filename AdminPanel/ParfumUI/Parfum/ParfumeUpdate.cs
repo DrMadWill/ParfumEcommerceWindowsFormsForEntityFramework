@@ -1,6 +1,5 @@
 ﻿using ParfumUI.Load;
 using ParfumUI.Parfum.Brend;
-using ParfumUI.Parfum.Load;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -177,7 +176,8 @@ namespace ParfumUI
                     parfumUpdate.DensityId = densityId;
                     parfumUpdate.BrendId = brendId;
                     parfumUpdate.GenderId = gederId;
-                    parfumUpdate.Image = File.ReadAllBytes(@image);
+                    if (!string.IsNullOrEmpty(image))
+                        parfumUpdate.Image = File.ReadAllBytes(@image);
                     LoadCommonData._db.SaveChanges();
                 }
                 // Save
@@ -209,6 +209,11 @@ namespace ParfumUI
                 string gender = combGender.SelectedItem.ToString().Trim();
                 string density = combDensity.SelectedItem.ToString().Trim();
 
+                if (string.IsNullOrEmpty(name))
+                {
+                    ParfumMessenge.Error("Name Add .");
+                    return;
+                }
 
                 // find BrendId
                 int brendId = LoadCommonData._db.Brends
@@ -228,8 +233,6 @@ namespace ParfumUI
                 var parfumIsAdd = LoadCommonData._db.Parfumes
                     .FirstOrDefault(es => es.Name.Trim().ToLower() == name.ToLower() && es.BrendId == brendId);
 
-                byte[] imageByte = File.ReadAllBytes(@image);
-
                 // Parfum Added Check
                 if (parfumIsAdd != null)
                 {
@@ -245,8 +248,11 @@ namespace ParfumUI
                     BrendId = brendId,
                     GenderId = gederId,
                     DensityId = densityId,
-                    Image= imageByte
+                    
                 };
+                // Check image
+                if(!string.IsNullOrEmpty(image))
+                    parfume.Image = File.ReadAllBytes(@image);
 
                 LoadCommonData._db.Parfumes.Add(parfume);
                 // Save
