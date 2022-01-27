@@ -280,7 +280,7 @@ namespace ParfumUI.Users
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "UserActivity";
-            this.Text = "User Activity";
+            this.Text = "Login Access";
             this.Load += new System.EventHandler(this.UserActivity_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViwUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLoginUser)).EndInit();

@@ -139,6 +139,12 @@ namespace ParfumUI.CatogoryView
                     LoadCommonData._db.Catogories.Remove(category);
                     LoadCommonData._db.SaveChanges();
                     ParfumMessenge.Warning($"{oldname} Deleted");
+                    RefresData.salePriceLists.ChangeData();
+
+                    // Refres Main Menu Category
+                    RefresData.salePriceLists.LoadCatogory();
+
+
                     CategoryChange();
                 }
                 else

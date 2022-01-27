@@ -36,7 +36,11 @@ namespace ParfumUI.CatogoryView
         private void SalePriceLists_Load(object sender, EventArgs e)
         {
             textUser.Text = UserName;
+
+            // Category Load
             LoadCatogory();
+
+            // Category Change 
             ChangeData();
 
             LoginUserChange();
@@ -89,6 +93,7 @@ namespace ParfumUI.CatogoryView
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalePrice salePrice = new SalePrice();
+            RefresData.salePrice = salePrice;
             salePrice.ShowDialog();
         }
 

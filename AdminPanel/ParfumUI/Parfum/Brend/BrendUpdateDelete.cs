@@ -129,6 +129,9 @@ namespace ParfumUI.Parfum.Brend
                 LoadCommonData.LoadBrend(combBrend);
                 combBrend.SelectedIndex = 0;
 
+                // Refers Information Main Menu
+                RefresData.salePriceLists.ChangeData();
+
                 ParfumMessenge.Warning("Brend Update");
             }
         }

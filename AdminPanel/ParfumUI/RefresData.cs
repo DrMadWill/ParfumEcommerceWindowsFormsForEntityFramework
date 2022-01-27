@@ -15,5 +15,9 @@ namespace ParfumUI
         // Sale Price List
         public static SalePriceLists salePriceLists;
 
+
+        // Size Change
+        public static SalePrice salePrice;
+
     }
 }

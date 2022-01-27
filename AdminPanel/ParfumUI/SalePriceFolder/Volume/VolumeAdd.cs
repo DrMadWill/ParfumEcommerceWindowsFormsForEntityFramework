@@ -48,6 +48,8 @@ namespace ParfumUI.SalePriceFolder.Volume
                 textVolume.Text = "";
                 LoadCommonData.LoadSize(combSize);
                 ParfumMessenge.Warning($"{volume} Added");
+                // Sale Price Panel Refers
+                RefresData.salePrice.ChangeSize();
             }
         }
 
@@ -85,6 +87,9 @@ namespace ParfumUI.SalePriceFolder.Volume
                 LoadCommonData._db.SaveChanges();
                 ParfumMessenge.Warning($"{oldsize} Size Updated");
                 LoadCommonData.LoadSize(combSize);
+                // Sale Price Panel Refers
+                RefresData.salePrice.ChangeSize();
+
             }
         }
 

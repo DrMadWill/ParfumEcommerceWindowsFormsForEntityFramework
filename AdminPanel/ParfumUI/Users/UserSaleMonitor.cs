@@ -136,17 +136,17 @@ namespace ParfumUI.Users
             {
 
                 string UserName = "";
-                if (checkUser.Checked && combUser.SelectedItem !=null)
+                if (checkUser.Checked && combUser.SelectedItem !=null && checkEmp.Checked!=true)
                 {
                     UserName = combUser.SelectedItem.ToString();
                 }
-                else if (checkEmp.Checked && combEmploye.SelectedItem!=null)
+                else if (checkEmp.Checked && combEmploye.SelectedItem!=null && checkUser.Checked != true)
                 {
                     UserName = combEmploye.SelectedItem.ToString();
                 }
                 else
                 {
-                    ParfumMessenge.Error("Select User Or Emloyee");
+                    ParfumMessenge.Error("Select One User Or One Emloyee!");
                     return;
                 }
 
@@ -164,10 +164,13 @@ namespace ParfumUI.Users
                     int saleCount = 0;
                     DataModelMsSql.SalePrice Price;
                     int PriceIdId = 0;
+                    int priceDataGridVeiw = 0;
                     try
                     {
                         PriceIdId = int.Parse(row.Cells["PriceId"].Value.ToString().Trim());
                         saleCount = int.Parse(row.Cells["SaleCount"].Value.ToString().Trim());
+                        priceDataGridVeiw = int.Parse(row.Cells["ParfumPrice"].Value.ToString().Trim());
+                        
                         Price = LoadCommonData._db.SalePrices.Find(PriceIdId);
                         if (Price == null)
                             throw new Exception();
@@ -191,11 +194,13 @@ namespace ParfumUI.Users
                         return;
                     }
 
+                    int total = priceDataGridVeiw * saleCount;
+
                     Sale sale = new Sale()
                     {
                         SalePriceId = Price.Id,
                         Date = dateTimeSale.Value,
-                        Total = Price.Price*saleCount,
+                        Total = total,
                         Count=saleCount,
                         UserId=userId,
                     };
@@ -203,7 +208,7 @@ namespace ParfumUI.Users
                     LoadCommonData._db.Sales.Add(sale);
                     LoadCommonData._db.SaveChanges();
 
-                    ParfumMessenge.Warning($": Parfum {Price.Parfume.Brend.Name} / {Price.Parfume.Name} Saled ");
+                    ParfumMessenge.Warning($"Parfum {Price.Parfume.Brend.Name} / {Price.Parfume.Name} Saled. Your Price : {total} ");
                     dataGridViewSales.Rows.Remove(row);
                     ChangeData();
                 }
