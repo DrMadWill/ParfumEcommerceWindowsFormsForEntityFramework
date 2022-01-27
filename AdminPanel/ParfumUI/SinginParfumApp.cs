@@ -42,10 +42,12 @@ namespace ParfumUI
                     textLogin.Text = "";
                     textPassword.Text = "";
                 }
+                else
+                    ParfumMessenge.Error("Password Wrong !");
             }
             else
             {
-                ParfumMessenge.Error("Login Or Password Wrong or Not Access");
+                ParfumMessenge.Error("Login Wrong or Not Access");
             }
 
         }

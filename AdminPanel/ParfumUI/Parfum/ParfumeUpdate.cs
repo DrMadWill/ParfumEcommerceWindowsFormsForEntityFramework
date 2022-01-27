@@ -58,41 +58,35 @@ namespace ParfumUI
 
 
                 var parfumDelete = LoadCommonData._db.Parfumes.Find(ParfumId);
-                if (parfumDelete != null)
+                var isUsingElementCategory = LoadCommonData._db.CategoryToParfums.FirstOrDefault(dr => dr.ParfumId == ParfumId);
+                if (isUsingElementCategory != null)
                 {
-                    var isUsingElementCategory = LoadCommonData._db.CategoryToParfums.FirstOrDefault(dr => dr.ParfumId == ParfumId);
-                    if (isUsingElementCategory != null)
-                    {
-                        ParfumMessenge.Error("This Elemet is Using");
-                        return;
-                    }
-
-                    var isUsingElementPrice = LoadCommonData._db.SalePrices.FirstOrDefault(dr => dr.ParfumId == ParfumId);
-                    if (isUsingElementPrice != null)
-                    {
-                        ParfumMessenge.Error("This Elemet is Using");
-                        return;
-                    }
-
-                    LoadCommonData._db.Parfumes.Remove(parfumDelete);
-
-                    // Save
-                    LoadCommonData._db.SaveChanges();
-
-
-                    // Change DataGridView
-                    RefresData.parfum_Function.ChangeParfum();
-
-                    // Clear Elemets
-                    ClearBoxs();
-
-                    ParfumMessenge.Warning($"{parfumFulName} Parfum Deleted");
-
-                    ChangeData();
+                    ParfumMessenge.Error("This Elemet is Using");
+                    return;
                 }
-                else
-                    ParfumMessenge.Error("Not Found This Elemet");
 
+                var isUsingElementPrice = LoadCommonData._db.SalePrices.FirstOrDefault(dr => dr.ParfumId == ParfumId);
+                if (isUsingElementPrice != null)
+                {
+                    ParfumMessenge.Error("This Elemet is Using");
+                    return;
+                }
+
+                LoadCommonData._db.Parfumes.Remove(parfumDelete);
+
+                // Save
+                LoadCommonData._db.SaveChanges();
+
+
+                // Change DataGridView
+                RefresData.parfum_Function.ChangeParfum();
+
+                // Clear Elemets
+                ClearBoxs();
+
+                ParfumMessenge.Warning($"{parfumFulName} Parfum Deleted");
+
+                ChangeData();
 
                
             }

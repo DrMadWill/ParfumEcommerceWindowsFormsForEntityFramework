@@ -142,7 +142,7 @@ namespace ParfumUI.Users
             this.btnSale.Name = "btnSale";
             this.btnSale.Size = new System.Drawing.Size(146, 46);
             this.btnSale.TabIndex = 44;
-            this.btnSale.Text = "Sale";
+            this.btnSale.Text = "Buy";
             this.btnSale.UseVisualStyleBackColor = false;
             this.btnSale.Click += new System.EventHandler(this.btnSale_Click);
             // 

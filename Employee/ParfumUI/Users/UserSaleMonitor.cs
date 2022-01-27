@@ -150,11 +150,11 @@ namespace ParfumUI.Users
                         ParfumMessenge.Error("PLease Count Add.");
                         return;
                     }
-
+                    int total = Price.Price * saleCount;
                     Sale sale = new Sale()
                     {
                         SalePriceId = Price.Id,
-                        Total = Price.Price*saleCount,
+                        Total = total,
                         Date=DateTime.Now,
                         Count=saleCount,
                         UserId=userId,
@@ -163,7 +163,7 @@ namespace ParfumUI.Users
                     LoadCommonData._db.Sales.Add(sale);
                     LoadCommonData._db.SaveChanges();
 
-                    ParfumMessenge.Warning($": Parfum {Price.Parfume.Brend.Name} / {Price.Parfume.Name} Saled ");
+                    ParfumMessenge.Warning($": Parfum {Price.Parfume.Brend.Name} / {Price.Parfume.Name} Saled. Your Price : {total} ");
                     dataGridViewSales.Rows.Remove(row);
                     ChangeData();
                 }

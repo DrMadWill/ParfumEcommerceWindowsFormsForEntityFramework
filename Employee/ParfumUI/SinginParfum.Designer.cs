@@ -36,21 +36,23 @@ namespace ParfumUI
             this.label1 = new System.Windows.Forms.Label();
             this.textLogin = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btnSignUp);
             this.panel1.Controls.Add(this.btnSingin);
             this.panel1.Controls.Add(this.textPassword);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textLogin);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(10, 9);
+            this.panel1.Location = new System.Drawing.Point(12, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(485, 444);
+            this.panel1.Size = new System.Drawing.Size(485, 495);
             this.panel1.TabIndex = 6;
             // 
             // btnSignUp
@@ -58,7 +60,7 @@ namespace ParfumUI
             this.btnSignUp.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnSignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSignUp.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSignUp.Location = new System.Drawing.Point(20, 358);
+            this.btnSignUp.Location = new System.Drawing.Point(20, 416);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(448, 66);
             this.btnSignUp.TabIndex = 6;
@@ -71,7 +73,7 @@ namespace ParfumUI
             this.btnSingin.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnSingin.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSingin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSingin.Location = new System.Drawing.Point(20, 257);
+            this.btnSingin.Location = new System.Drawing.Point(20, 315);
             this.btnSingin.Name = "btnSingin";
             this.btnSingin.Size = new System.Drawing.Size(448, 66);
             this.btnSingin.TabIndex = 0;
@@ -82,7 +84,7 @@ namespace ParfumUI
             // textPassword
             // 
             this.textPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textPassword.Location = new System.Drawing.Point(20, 180);
+            this.textPassword.Location = new System.Drawing.Point(20, 238);
             this.textPassword.Name = "textPassword";
             this.textPassword.Size = new System.Drawing.Size(448, 34);
             this.textPassword.TabIndex = 4;
@@ -92,7 +94,7 @@ namespace ParfumUI
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(13, 11);
+            this.label1.Location = new System.Drawing.Point(13, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 38);
             this.label1.TabIndex = 1;
@@ -101,7 +103,7 @@ namespace ParfumUI
             // textLogin
             // 
             this.textLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textLogin.Location = new System.Drawing.Point(20, 67);
+            this.textLogin.Location = new System.Drawing.Point(20, 125);
             this.textLogin.Name = "textLogin";
             this.textLogin.Size = new System.Drawing.Size(448, 34);
             this.textLogin.TabIndex = 3;
@@ -111,18 +113,29 @@ namespace ParfumUI
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(13, 122);
+            this.label2.Location = new System.Drawing.Point(13, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 38);
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(114, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(268, 38);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Employee Panel";
             // 
             // SinginParfum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(504, 463);
+            this.ClientSize = new System.Drawing.Size(504, 529);
             this.Controls.Add(this.panel1);
             this.Name = "SinginParfum";
             this.Text = "SinginParfum";
@@ -142,5 +155,6 @@ namespace ParfumUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textLogin;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

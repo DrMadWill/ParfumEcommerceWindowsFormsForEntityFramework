@@ -14,9 +14,9 @@ using System.Windows.Forms;
 
 namespace ParfumUI
 {
-    public partial class SinginParfumApp : Form
+    public partial class SinginParfum : Form
     {
-        public SinginParfumApp()
+        public SinginParfum()
         {
             InitializeComponent();
         }
@@ -24,33 +24,34 @@ namespace ParfumUI
         private void btnSingin_Click(object sender, EventArgs e)
         {
             string login = textLogin.Text.Trim();
-         
+
             string pass = textPassword.Text.Trim();
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(pass))
             {
                 ParfumMessenge.Error("You Must Be Wrtie Information");
                 return;
             }
-            var user = LoadCommonData._db.Users.FirstOrDefault(dr => dr.FullName.ToLower() == login.ToLower());
-            if(user!=null)
+            var user = LoadCommonData._db.Users.FirstOrDefault(dr => dr.FullName == login);
+            if (user != null && user.IsUser && user.IsActive)
             {
-                string usercode = Cryptography.Decode(user.Password);
                 if (Cryptography.Decode(user.Password) == pass)
                 {
                     SalePriceLists salePriceLists = new SalePriceLists(user.FullName);
                     RefresData.salePriceLists = salePriceLists;
-
                     salePriceLists.ShowDialog();
-
-                    //salePriceLists.Show();
-                    //this.Hide();
-
+                    textLogin.Text = "";
+                    textPassword.Text = "";
                 }
+                else
+                    ParfumMessenge.Error("Login wrong !");
             }
-
+            else
+            {
+                ParfumMessenge.Error("Login wrong Or Not Access!");
+            }
         }
 
-        private void SinginParfumApp_Load(object sender, EventArgs e)
+        private void SinginParfum_Load(object sender, EventArgs e)
         {
             textPassword.PasswordChar = '*';
         }

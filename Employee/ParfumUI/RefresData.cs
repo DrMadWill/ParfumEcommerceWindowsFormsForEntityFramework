@@ -16,8 +16,8 @@ namespace ParfumUI
         // Parfum Function Change - Parfum Add, Parfum Update, Parfum Delete 
         public static Parfum_Function parfum_Function;
 
-       
-
+        // Size Change
+        public static SalePrice salePrice;
 
         // Sale Price List
         public static SalePriceLists salePriceLists;

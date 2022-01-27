@@ -78,6 +78,7 @@ namespace ParfumUI.CatogoryView
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalePrice salePrice = new SalePrice();
+            RefresData.salePrice = salePrice;
             salePrice.ShowDialog();
         }
 
