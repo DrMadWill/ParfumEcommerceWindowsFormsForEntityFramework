@@ -120,19 +120,22 @@ namespace ParfumUI.Load
 
         public static void LoadSize(ComboBox comboBox)
         {
-
-            comboBox.Items.Clear();
-            var categorys = LoadCommonData._db.Sizes.Select(dr => dr.Size1);
+           
+            var categorys = _db.Sizes.Select(dr => dr.Size1);
             if (categorys != null)
             {
+                comboBox.Items.Clear();
                 foreach (var item in categorys)
                 {
                     comboBox.Items.Add(item);
                 }
+                comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                comboBox.SelectedIndex = 0;
             }
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox.SelectedIndex = 0;
+            
         }
+
+
 
 
         public static bool CheckLogin(string login)
